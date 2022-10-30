@@ -35,7 +35,9 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val jvmMain by getting
+        val jvmMain by getting {
+            dependsOn(commonMain)
+        }
         val jvmTest by getting
         val jsMain by getting
         val jsTest by getting

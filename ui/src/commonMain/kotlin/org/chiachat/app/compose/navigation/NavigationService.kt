@@ -6,12 +6,16 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import org.chiachat.app.compose.components.Component
 
-class NavigationService(val maxScreens: Int = 10) {
+class NavigationService(initialScreen: Component, val maxScreens: Int = 10) {
 
     private val screenTree: MutableList<Component> = mutableListOf()
     private val currentScreenIndex: MutableState<Int> = mutableStateOf(0)
     private val currentScreen_: MutableState<Component?> = mutableStateOf(null)
     val currentScreen: State<Component?> = currentScreen_
+
+    init {
+        navigate(initialScreen)
+    }
 
     fun navigate(screen: Component) {
         // remove any screens in the front of our screen tree since we forked off to a new branch

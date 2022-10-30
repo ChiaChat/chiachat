@@ -1,72 +1,75 @@
 package org.chiachat.app.compose.theme
 
 import androidx.compose.material.Typography
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.unit.sp
-import com.soywiz.korio.async.launch
-import com.soywiz.korio.async.runBlockingNoJs
+import co.touchlab.kermit.Logger
+import com.soywiz.korio.file.VfsFile
+import com.soywiz.korio.file.baseName
+import com.soywiz.korio.file.baseNameWithoutExtension
 import com.soywiz.korio.file.std.resourcesVfs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 // Set of Material typography styles to start with
 
-val oxygen = FontFamily(
-    Font(
-        identity = "Oxygen-Bold",
-        weight = FontWeight.W400,
-        style = FontStyle.Normal
-    )
-)
+suspend fun loadFont(file: VfsFile): Font {
+  val name = file.baseNameWithoutExtension
+  val fontData = file.readAll()
+  val weight = fontToWeight(name.split("-").lastOrNull() ?: "")
+  return Font(identity = file.baseNameWithoutExtension, data = fontData, weight = weight)
+}
+
+fun fontToWeight(name: String): FontWeight {
+  return when (name.lowercase()) {
+    "semibold" -> FontWeight.SemiBold
+    "bold" -> FontWeight.Bold
+    "extrabold" -> FontWeight.ExtraBold
+    "light" -> FontWeight.Light
+    "regular" -> FontWeight.Normal
+    "normal" -> FontWeight.Normal
+    "thin" -> FontWeight.Thin
+    "extralight" -> FontWeight.ExtraLight
+    else -> FontWeight.Normal
+  }
+}
 
 
-val ChiaChatTypography = Typography(
-    defaultFontFamily = oxygen.value,
-    h4 = TextStyle(
-        fontWeight = FontWeight.W600,
-        fontSize = 30.sp
-    ),
-    h5 = TextStyle(
-        fontWeight = FontWeight.W600,
-        fontSize = 24.sp
-    ),
-    h6 = TextStyle(
-        fontWeight = FontWeight.W600,
-        fontSize = 20.sp
-    ),
-    subtitle1 = TextStyle(
-        fontWeight = FontWeight.W600,
-        fontSize = 16.sp
-    ),
-    subtitle2 = TextStyle(
-        fontWeight = FontWeight.W500,
-        fontSize = 14.sp
-    ),
-    body1 = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
-    ),
-    body2 = TextStyle(
-        fontSize = 14.sp
-    ),
-    button = TextStyle(
-        fontWeight = FontWeight.W500,
-        fontSize = 14.sp
-    ),
-    caption = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 12.sp
-    ),
-    overline = TextStyle(
-        fontWeight = FontWeight.W500,
-        fontSize = 12.sp
-    )
-)
+
+suspend fun loadFontFamily(name: String): FontFamily {
+  val fonts =
+      resourcesVfs["fonts"]
+          .listRecursiveSimple()
+          .filter { it.isFile() && it.baseName.lowercase().contains(name.lowercase()) }
+          .map { loadFont(it) }
+      return if(fonts.isEmpty()) FontFamily.Default else FontFamily(fonts)
+}
+
+
+private val defaultFontFamily = MutableStateFlow<FontFamily>(FontFamily.Default)
+@Composable
+fun ChiaChatTypography(resources: ThemeResources): Typography {
+  return Typography(
+      defaultFontFamily = resources.defaultFont,
+      h4 = TextStyle(fontWeight = FontWeight.W600, fontSize = 30.sp),
+      h5 = TextStyle(fontWeight = FontWeight.W600, fontSize = 24.sp),
+      h6 = TextStyle(fontWeight = FontWeight.W600, fontSize = 20.sp),
+      subtitle1 = TextStyle(fontWeight = FontWeight.W600, fontSize = 16.sp),
+      subtitle2 = TextStyle(fontWeight = FontWeight.W500, fontSize = 14.sp),
+      body1 = TextStyle(fontWeight = FontWeight.Normal, fontSize = 16.sp),
+      body2 = TextStyle(fontSize = 14.sp),
+      button = TextStyle(fontWeight = FontWeight.W500, fontSize = 14.sp),
+      caption = TextStyle(fontWeight = FontWeight.Normal, fontSize = 12.sp),
+      overline = TextStyle(fontWeight = FontWeight.W500, fontSize = 12.sp))
+}

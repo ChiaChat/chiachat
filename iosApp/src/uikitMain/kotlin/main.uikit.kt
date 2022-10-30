@@ -8,8 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Application
-import org.chiachat.app.ComposeApp
-import org.chiachat.app.compose.components.shared.main.MainComponent
+import org.chiachat.app.compose.ComposeApp
 import kotlinx.cinterop.*
 import platform.Foundation.*
 import platform.UIKit.*
@@ -40,7 +39,7 @@ class SkikoAppDelegate : UIResponder, UIApplicationDelegateProtocol {
     override fun application(application: UIApplication, didFinishLaunchingWithOptions: Map<Any?, *>?): Boolean {
         window = UIWindow(frame = UIScreen.mainScreen.bounds)
         val app = ComposeApp()
-        val mainComponent = MainComponent()
+        val mainComponent = ComposeApp()
         window!!.rootViewController = Application("chiachat") {
             Column {
                 Spacer(modifier = Modifier.size(48.dp))

@@ -8,7 +8,7 @@
       modifier: Modifier, onClick: () -&gt; Unit)</ID>
     <ID>FunctionNaming:Buttons.kt$@Composable fun org.chiachat.app.compose.shared.RoundedPrimaryButton( text: String,
       modifier: Modifier = Modifier, onClick: () -&gt; Unit )</ID>
-    <ID>FunctionNaming:LandingComponent.kt$LandingComponent$@Composable fun LandingScreen()</ID>
+    <ID>FunctionNaming:org.chiachat.app.compose.components.LandingComponent.kt$org.chiachat.app.compose.components.LandingComponent$@Composable fun LandingScreen()</ID>
     <ID>FunctionNaming:org.chiachat.app.compose.components.fan.auth.login.LoginComponent.kt$org.chiachat.app.compose.components.fan.auth.login.LoginComponent$@Composable
       fun LoginScreen()</ID>
     <ID>FunctionNaming:org.chiachat.app.compose.components.fan.auth.register.RegisterComponent.kt$org.chiachat.app.compose.components.fan.auth.register.RegisterComponent.Companion$@Composable
@@ -48,7 +48,7 @@
     <ID>UnusedPrivateMember:build.gradle.kts$val uikitX64Main by getting { dependsOn(uikitMain) }</ID>
     <ID>VariableNaming:NavigationService.kt$NavigationService$private val currentScreen_: MutableState&lt;Component?&gt; = mutableStateOf(null)</ID>
     <ID>WildcardImport:Buttons.kt$import androidx.compose.material.*</ID>
-    <ID>WildcardImport:LandingComponent.kt$import androidx.compose.foundation.layout.*</ID>
+    <ID>WildcardImport:org.chiachat.app.compose.components.LandingComponent.kt$import androidx.compose.foundation.layout.*</ID>
     <ID>WildcardImport:org.chiachat.app.compose.components.fan.auth.login.LoginComponent.kt$import
       androidx.compose.runtime.*</ID>
     <ID>WildcardImport:org.chiachat.app.web.main.uikit.kt$import androidx.compose.foundation.layout.*</ID>

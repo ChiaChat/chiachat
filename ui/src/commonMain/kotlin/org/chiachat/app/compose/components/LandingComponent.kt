@@ -1,11 +1,13 @@
+package org.chiachat.app.compose.components
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import org.chiachat.app.compose.components.Component
 import org.chiachat.app.compose.shared.PrimaryTextButton
 import org.chiachat.app.compose.shared.RoundedPrimaryButton
 
@@ -46,7 +48,7 @@ class LandingComponent : Component() {
             Text(
                 text = "ChiaChat",
                 style = MaterialTheme.typography.h1,
-                color = MaterialTheme.colors.primary
+                color = Color.Green
             )
         }
 
@@ -55,7 +57,7 @@ class LandingComponent : Component() {
             Text(
                 text =  "Free & Open Source Matrix Client",
                 style = MaterialTheme.typography.caption,
-                color = MaterialTheme.colors.onBackground
+//                color = MaterialTheme.colors.onBackground
             )
         }
     }

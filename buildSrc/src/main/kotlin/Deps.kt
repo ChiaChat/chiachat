@@ -27,6 +27,7 @@ object Versions {
     const val nativeCoroutines = "0.12.5"
     const val cognitoIdp = "2.5.0"
     const val kor = "3.3.0"
+    const val okio = "3.2.0"
 }
 
 object Plugin {
@@ -89,6 +90,9 @@ object Deps {
     object Kor {
         const val korio = "com.soywiz.korlibs.korio:korio:${Versions.kor}"
     }
+
+    const val okio = "com.squareup.okio:okio:${Versions.okio}"
+
 
     object Kotlinx {
         const val coroutines =

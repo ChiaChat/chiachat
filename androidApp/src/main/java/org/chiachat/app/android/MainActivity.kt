@@ -4,24 +4,48 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.addCallback
 import androidx.activity.compose.setContent
-import org.chiachat.app.ComposeApp
-import org.chiachat.app.compose.components.shared.main.MainComponent
+import com.soywiz.korio.android.withAndroidContext
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
+import org.chiachat.app.compose.ComposeAppModules
+import org.chiachat.app.SharedAppModules
+import org.chiachat.app.compose.ComposeApp
+import org.chiachat.app.compose.navigation.NavigationService
+import org.chiachat.app.compose.theme.ThemeResources
+import org.chiachat.app.compose.theme.loadOxygen
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import org.koin.core.context.startKoin
+import org.koin.dsl.module
 
 class MainActivity : ComponentActivity(), KoinComponent {
-    val app = ComposeApp()
-    val mainComponent = MainComponent()
+  val mainActivity = this
+  val androidModule = module { single { mainActivity } }
+  val app = ComposeApp(loadResources = ::loadThemeResources)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            mainComponent.view()
-        }
+  val navigationService: NavigationService by inject()
 
-        val callback = onBackPressedDispatcher.addCallback(this) {
-            app.navigationService.back()
-        }
-
-        callback.isEnabled = true
+  init {
+    startKoin {
+      modules(SharedAppModules.sharedModule, ComposeAppModules.composeModule, androidModule)
     }
+  }
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+
+    super.onCreate(savedInstanceState)
+    setContent { app.View() }
+
+    val callback = onBackPressedDispatcher.addCallback(this) { navigationService.back() }
+
+    callback.isEnabled = true
+  }
+
+  fun loadThemeResources(resources: MutableStateFlow<ThemeResources>) {
+    CoroutineScope(Dispatchers.IO).launch {
+      withAndroidContext(mainActivity) { resources.value = ThemeResources(loadOxygen()) }
+    }
+  }
 }

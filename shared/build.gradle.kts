@@ -35,7 +35,6 @@ kotlin {
                 api(Deps.Apollo.runtime)
                 api(Deps.Kotlinx.coroutines)
                 api(Deps.Koin.core)
-                api(Deps.Network.cognito)
                 api(Deps.Kor.korio)
             }
         }

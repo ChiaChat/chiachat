@@ -1,6 +1,6 @@
 package org.chiachat.app.compose.navigation
 
-import LandingComponent
+import org.chiachat.app.compose.components.LandingComponent
 import org.chiachat.app.compose.components.auth.login.LoginComponent
 import org.chiachat.app.compose.components.auth.register.RegisterComponent
 import kotlin.test.Test

@@ -1,16 +1,14 @@
 package org.chiachat.app.web
 
 import androidx.compose.runtime.Composable
-import org.chiachat.app.ComposeApp
-import org.chiachat.app.compose.components.shared.main.MainComponent
+import org.chiachat.app.compose.ComposeApp
 import kotlinx.browser.window
 import org.khronos.webgl.WebGLRenderingContext
 import org.w3c.dom.HTMLCanvasElement
 
 class WebApp {
 
-  val app = ComposeApp()
-  val mainComponent = MainComponent()
+  val mainComponent = ComposeApp()
 
   val canvas = window.document.getElementById("ComposeTarget") as HTMLCanvasElement
   val ctx = canvas.getContext("webgl") as WebGLRenderingContext
@@ -28,6 +26,6 @@ class WebApp {
 
   @Composable
   fun View() {
-    mainComponent.view()
+    mainComponent.View()
   }
 }
