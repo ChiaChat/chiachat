@@ -46,8 +46,8 @@ jobs:
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
         run: |
           # create variables
-          CERTIFICATE_PATH=$RUNNER_TEMP/MNP_Cert.p12
-          PP_PATH=$RUNNER_TEMP/MNP_Dist.mobileprovision
+          CERTIFICATE_PATH=$RUNNER_TEMP/CCH_Cert.p12
+          PP_PATH=$RUNNER_TEMP/CCH_Dist.mobileprovision
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
           # import certificate and provisioning profile from secrets
           echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode --output $CERTIFICATE_PATH

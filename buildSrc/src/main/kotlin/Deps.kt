@@ -26,6 +26,7 @@ object Versions {
     const val composeMultiplatform = "1.2.0"
     const val nativeCoroutines = "0.12.5"
     const val cognitoIdp = "2.5.0"
+    const val kor = "3.3.0"
 }
 
 object Plugin {
@@ -85,6 +86,10 @@ object Deps {
         const val accompanistSwipeRefresh = "com.google.accompanist:accompanist-swiperefresh:${Versions.accompanist}"
     }
 
+    object Kor {
+        const val korio = "com.soywiz.korlibs.korio:korio:${Versions.kor}"
+    }
+
     object Kotlinx {
         const val coroutines =
             "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
@@ -137,4 +142,5 @@ object Deps {
     object Network {
         const val cognito = "com.liftric:cognito-idp:${Versions.cognitoIdp}"
     }
+
 }

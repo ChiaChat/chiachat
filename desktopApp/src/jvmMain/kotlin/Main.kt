@@ -1,16 +1,14 @@
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import com.dialexa.mnp.app.ComposeApp
-import com.dialexa.mnp.compose.components.shared.main.MainComponent
-import com.dialexa.mnp.compose.theme.AppTheme
+import org.chiachat.app.ComposeApp
+import org.chiachat.app.compose.components.shared.main.MainComponent
+import org.chiachat.app.compose.theme.ChiaChatTheme
 
 val app = ComposeApp()
 val mainComponent = MainComponent()
 
 fun main() = application {
     Window(onCloseRequest = ::exitApplication) {
-        AppTheme {
             mainComponent.view()
-        }
     }
 }

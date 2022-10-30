@@ -30,7 +30,7 @@ compose.desktop {
         mainClass = "MainKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.dialexa.mnp.desktop"
+            packageName = "org.chiachat.app.desktop"
             packageVersion = "1.0.0"
         }
     }

@@ -7,7 +7,7 @@ plugins {
 android {
     compileSdk = 32
     defaultConfig {
-        applicationId = "com.dialexa.mnp.android"
+        applicationId = "org.chiachat.app.android"
         minSdk = 24
         targetSdk = 32
         versionCode = 1

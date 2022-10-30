@@ -62,8 +62,8 @@ kotlin {
 compose.experimental {
     web.application {}
     uikit.application {
-        bundleIdPrefix = "com.dialexa.mnp"
-        projectName = "myNILpay"
+        bundleIdPrefix = "org.chiachat.app"
+        projectName = "ChiaChat"
         deployConfigurations {
             simulator("IPhone13Pro") {
                 // Usage: ./gradlew iosDeployIPhone8Debug

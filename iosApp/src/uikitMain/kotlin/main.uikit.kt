@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Application
-import com.dialexa.mnp.app.ComposeApp
-import com.dialexa.mnp.compose.components.shared.main.MainComponent
+import org.chiachat.app.ComposeApp
+import org.chiachat.app.compose.components.shared.main.MainComponent
 import kotlinx.cinterop.*
 import platform.Foundation.*
 import platform.UIKit.*

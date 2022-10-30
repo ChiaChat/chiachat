@@ -36,6 +36,7 @@ kotlin {
                 api(Deps.Kotlinx.coroutines)
                 api(Deps.Koin.core)
                 api(Deps.Network.cognito)
+                api(Deps.Kor.korio)
             }
         }
         val commonTest by getting {

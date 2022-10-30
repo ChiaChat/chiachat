@@ -9,7 +9,7 @@ NOTE: Code Owners will automatically be added to every PR
 
 ## :ticket: JIRA Tickets
 <!--- All work should have an associated ticket in JIRA -->
-* [MNP-XXX](https://mynilpay.atlassian.net/browse/MNP-XXX)
+* [CCH-XXX](https://mynilpay.atlassian.net/browse/CCH-XXX)
 
 ## :art: Invision Links:
 <!--- Links to design assets -->

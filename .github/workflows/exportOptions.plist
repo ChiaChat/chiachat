@@ -4,8 +4,8 @@
 <dict>
 	<key>provisioningProfiles</key>
 	<dict>
-		<key>com.mnptest.mnp</key>
-		<string>MNP Distribution</string>
+		<key>com.apptest.app</key>
+		<string>CCH Distribution</string>
 	</dict>
 	<key>method</key>
 	<string>app-store</string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.dialexa.mnp.android">
+          package="org.chiachat.app.android">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
             android:usesCleartextTraffic="true"
@@ -8,7 +8,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name="com.dialexa.mnp.android.MainActivity"
+                android:name="org.chiachat.app.android.MainActivity"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

@@ -38,7 +38,7 @@ allprojects {
     }
 }
 
-val rootPackage = "com.dialexa.mnp"
+val rootPackage = "org.chiachat.app"
 val basePackage = listOf("*", "").map { "$rootPackage.it" }
 val excludedPackages = listOf(
     "type", "selections", "adapter", "apollo", "test", "android.test", "compose", ""
