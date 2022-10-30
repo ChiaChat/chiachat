@@ -8,63 +8,64 @@ import org.chiachat.app.compose.components.Component
 
 class NavigationService(initialScreen: Component, val maxScreens: Int = 10) {
 
-    private val screenTree: MutableList<Component> = mutableListOf()
-    private val currentScreenIndex: MutableState<Int> = mutableStateOf(0)
-    private val currentScreen_: MutableState<Component?> = mutableStateOf(null)
-    val currentScreen: State<Component?> = currentScreen_
+  private val screenTree: MutableList<Component> = mutableListOf()
+  private val currentScreenIndex: MutableState<Int> = mutableStateOf(0)
+  private val currentScreen_: MutableState<Component?> = mutableStateOf(null)
+  val currentScreen: State<Component?> = currentScreen_
 
-    init {
-        navigate(initialScreen)
+  init {
+    navigate(initialScreen)
+  }
+
+  fun navigate(screen: Component) {
+    // remove any screens in the front of our screen tree since we forked off to a new branch
+    if (screenTree.size > 0 && currentScreenIndex.value != screenTree.lastIndex) {
+      screenTree.subList(currentScreenIndex.value + 1, screenTree.size).clear()
     }
 
-    fun navigate(screen: Component) {
-        // remove any screens in the front of our screen tree since we forked off to a new branch
-        if (screenTree.size > 0 && currentScreenIndex.value != screenTree.lastIndex) {
-            screenTree.subList(currentScreenIndex.value + 1, screenTree.size).clear()
-        }
+    screenTree.add(screen)
 
-        screenTree.add(screen)
-
-        // Prune old screen if we are holding too many
-        if (screenTree.size > maxScreens) {
-            screenTree.removeFirst()
-        }
-
-        currentScreenIndex.value = screenTree.lastIndex
-        updateScreen()
+    // Prune old screen if we are holding too many
+    if (screenTree.size > maxScreens) {
+      screenTree.removeFirst()
     }
 
-    fun back() {
-        if (currentScreenIndex.value > 0) {
-            currentScreenIndex.value--
-        }
-        updateScreen()
-    }
+    currentScreenIndex.value = screenTree.lastIndex
+    updateScreen()
+  }
 
-    fun forward() {
-        if (currentScreenIndex.value < screenTree.lastIndex) {
-            currentScreenIndex.value++
-        }
-        updateScreen()
+  fun back() {
+    if (currentScreenIndex.value > 0) {
+      currentScreenIndex.value--
     }
+    updateScreen()
+  }
 
-    fun clearHistory() {
-        val screen = currentScreen.value
-        if (screen != null) {
-            screenTree.clear()
-            screenTree.add(screen)
-            currentScreenIndex.value = screenTree.lastIndex
-            updateScreen()
-        }
+  fun forward() {
+    if (currentScreenIndex.value < screenTree.lastIndex) {
+      currentScreenIndex.value++
     }
+    updateScreen()
+  }
 
-    // Keeps the screen observable in sync with the index. Must be called wherever the screen index is changed.
-    private fun updateScreen() {
-        currentScreen_.value = screenTree[currentScreenIndex.value]
+  fun clearHistory() {
+    val screen = currentScreen.value
+    if (screen != null) {
+      screenTree.clear()
+      screenTree.add(screen)
+      currentScreenIndex.value = screenTree.lastIndex
+      updateScreen()
     }
+  }
 
-    @Composable
-    fun currentView() {
-        currentScreen.value?.view()
-    }
+  // Keeps the screen observable in sync with the index. Must be called wherever the screen index is
+  // changed.
+  private fun updateScreen() {
+    currentScreen_.value = screenTree[currentScreenIndex.value]
+  }
+
+  @Composable
+  fun currentView() {
+    currentScreen.value?.view()
+  }
 }

@@ -14,13 +14,13 @@ import org.chiachat.app.compose.theme.loadOxygen
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-fun loadResourcesDefault(resources: MutableStateFlow<ThemeResources>){
-  CoroutineScope(Dispatchers.Default).launch {
-    resources.value = ThemeResources(loadOxygen())
-  }
+fun loadResourcesDefault(resources: MutableStateFlow<ThemeResources>) {
+  CoroutineScope(Dispatchers.Default).launch { resources.value = ThemeResources(loadOxygen()) }
 }
 
-class ComposeApp(loadResources: (MutableStateFlow<ThemeResources>) -> Unit = ::loadResourcesDefault) : KoinComponent {
+class ComposeApp(
+    loadResources: (MutableStateFlow<ThemeResources>) -> Unit = ::loadResourcesDefault
+) : KoinComponent {
   val navigationService: NavigationService by inject()
 
   val themeResources = MutableStateFlow(ThemeResources())

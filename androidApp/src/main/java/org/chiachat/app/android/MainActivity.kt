@@ -9,9 +9,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import org.chiachat.app.compose.ComposeAppModules
 import org.chiachat.app.SharedAppModules
 import org.chiachat.app.compose.ComposeApp
+import org.chiachat.app.compose.ComposeAppModules
 import org.chiachat.app.compose.navigation.NavigationService
 import org.chiachat.app.compose.theme.ThemeResources
 import org.chiachat.app.compose.theme.loadOxygen

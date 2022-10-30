@@ -17,8 +17,8 @@ import org.khronos.webgl.WebGLRenderingContext
 import org.w3c.dom.HTMLCanvasElement
 
 class CanvasDebugApp {
-    val canvas = window.document.getElementById("ComposeTarget") as HTMLCanvasElement
-    val ctx = canvas.getContext("webgl") as WebGLRenderingContext
+  val canvas = window.document.getElementById("ComposeTarget") as HTMLCanvasElement
+  val ctx = canvas.getContext("webgl") as WebGLRenderingContext
   val div = window.document.body?.firstElementChild
 
   val screenInfo = MutableStateFlow(ScreenInfo(0, 0, 0, 0, 0, 0, 0, 0, 0.0))

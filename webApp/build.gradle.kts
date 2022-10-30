@@ -9,7 +9,6 @@ kotlin {
   js(IR) {
     browser()
     binaries.executable()
-
   }
 
   sourceSets {
@@ -25,13 +24,13 @@ kotlin {
 
 compose.experimental { web.application {} }
 
-tasks.withType<KotlinCompile> {
-  kotlinOptions.jvmTarget = "11"
-}
+tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "11" }
 
-// a temporary workaround for a bug in jsRun invocation - see https://youtrack.jetbrains.com/issue/KT-48273
+// a temporary workaround for a bug in jsRun invocation - see
+// https://youtrack.jetbrains.com/issue/KT-48273
 afterEvaluate {
-  rootProject.extensions.configure<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension> {
+  rootProject.extensions.configure<
+      org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension> {
     versions.webpackDevServer.version = "4.0.0"
     versions.webpackCli.version = "4.10.0"
     nodeVersion = "16.0.0"
@@ -40,7 +39,5 @@ afterEvaluate {
 
 // TODO: remove when https://youtrack.jetbrains.com/issue/KT-50778 fixed
 project.tasks.withType(org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile::class.java).configureEach {
-  kotlinOptions.freeCompilerArgs += listOf(
-    "-Xir-dce-runtime-diagnostic=log"
-  )
+  kotlinOptions.freeCompilerArgs += listOf("-Xir-dce-runtime-diagnostic=log")
 }

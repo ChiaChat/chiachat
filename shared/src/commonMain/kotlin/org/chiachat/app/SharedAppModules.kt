@@ -6,7 +6,5 @@ import org.koin.dsl.module
 
 object SharedAppModules {
 
-  val sharedModule = module {
-    singleOf(::ToastService)
-  }
+  val sharedModule = module { singleOf(::ToastService) }
 }

@@ -1,8 +1,8 @@
 package org.chiachat.app.web
 
 import androidx.compose.runtime.Composable
-import org.chiachat.app.compose.ComposeApp
 import kotlinx.browser.window
+import org.chiachat.app.compose.ComposeApp
 import org.khronos.webgl.WebGLRenderingContext
 import org.w3c.dom.HTMLCanvasElement
 

@@ -2,25 +2,17 @@ package org.chiachat.app.compose.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.unit.sp
-import co.touchlab.kermit.Logger
 import com.soywiz.korio.file.VfsFile
 import com.soywiz.korio.file.baseName
 import com.soywiz.korio.file.baseNameWithoutExtension
 import com.soywiz.korio.file.std.resourcesVfs
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 
 // Set of Material typography styles to start with
 
@@ -45,19 +37,17 @@ fun fontToWeight(name: String): FontWeight {
   }
 }
 
-
-
 suspend fun loadFontFamily(name: String): FontFamily {
   val fonts =
       resourcesVfs["fonts"]
           .listRecursiveSimple()
           .filter { it.isFile() && it.baseName.lowercase().contains(name.lowercase()) }
           .map { loadFont(it) }
-      return if(fonts.isEmpty()) FontFamily.Default else FontFamily(fonts)
+  return if (fonts.isEmpty()) FontFamily.Default else FontFamily(fonts)
 }
 
-
 private val defaultFontFamily = MutableStateFlow<FontFamily>(FontFamily.Default)
+
 @Composable
 fun ChiaChatTypography(resources: ThemeResources): Typography {
   return Typography(

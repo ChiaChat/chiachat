@@ -5,7 +5,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
 import com.soywiz.korio.file.std.resourcesVfs
-import kotlinx.coroutines.flow.MutableStateFlow
 
 val oxygenFonts =
     listOf("Oxygen-Bold", "Oxygen-Light", "Oxygen-Regular")
@@ -14,11 +13,8 @@ val oxygenFonts =
 
 suspend fun loadOxygen(): FontFamily = FontFamily(oxygenFonts.map { loadFont(it) })
 
-
 suspend fun loadThemeResources(): ThemeResources {
-    return ThemeResources(
-        defaultFont = loadOxygen()
-    )
+  return ThemeResources(defaultFont = loadOxygen())
 }
 
 @Composable

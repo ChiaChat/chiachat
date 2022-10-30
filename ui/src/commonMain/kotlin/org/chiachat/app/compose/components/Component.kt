@@ -7,8 +7,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 abstract class Component : KoinComponent {
-    val navigationService: NavigationService by inject()
-    val toastService: ToastService by inject()
-    @Composable
-    abstract fun view()
+  val navigationService: NavigationService by inject()
+  val toastService: ToastService by inject()
+  @Composable abstract fun view()
 }

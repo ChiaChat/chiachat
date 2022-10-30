@@ -6,8 +6,5 @@ import org.koin.dsl.module
 
 object ComposeAppModules {
 
-  val composeModule = module {
-    single { NavigationService(LandingComponent()) }
-  }
-
+  val composeModule = module { single { NavigationService(LandingComponent()) } }
 }
