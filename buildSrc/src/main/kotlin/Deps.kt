@@ -28,6 +28,7 @@ object Versions {
   const val cognitoIdp = "2.5.0"
   const val kor = "3.3.0"
   const val okio = "3.2.0"
+  val ktfmtGradle = "0.11.0"
 }
 
 object Plugin {
@@ -41,6 +42,7 @@ object Plugin {
     val mockmp = "org.kodein.mock.mockmp"
     val compose = "org.jetbrains.compose"
     val mokoResources = "dev.icerock.mobile.multiplatform-resources"
+    val ktfmt = "com.ncorti.ktfmt.gradle"
   }
 
   val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"

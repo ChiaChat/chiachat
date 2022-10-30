@@ -12,15 +12,13 @@ buildscript {
     classpath(Plugin.kotlinxSerialization)
     classpath(Plugin.proguard)
     classpath(Plugin.junitAndroid)
-    classpath(Plugin.apollo)
-    classpath("dev.icerock.moko:resources-generator:0.20.1")
   }
 }
 
 plugins {
   id(Plugin.Id.detekt) version Versions.detekt
-  id(Plugin.Id.ktlint) version Versions.ktlint
   id(Plugin.Id.kover) version Versions.kover
+  id(Plugin.Id.ktfmt) version Versions.ktfmtGradle
 }
 
 dependencies { detektPlugins(Plugin.detektFormatting) }
