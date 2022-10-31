@@ -1,3 +1,5 @@
+name: Release Android
+
 on:
   release:
     types: [ released, prereleased ]
@@ -17,9 +19,6 @@ jobs:
       - uses: gradle/gradle-build-action@v2.3.3
         with:
           arguments: androidApp:linkReleaseExecutableUikitArm64
-          wrapper-cache-enabled: true
-          dependencies-cache-enabled: true
-          configuration-cache-enabled: true
       - uses: softprops/action-gh-release@v1
         with:
           files: |
