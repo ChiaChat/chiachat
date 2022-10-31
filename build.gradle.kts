@@ -27,9 +27,9 @@ version = "1.0.0"
 
 allprojects {
   repositories {
-    google()
-    mavenLocal()
     mavenCentral()
+    mavenLocal()
+    google()
     maven { url = uri("https://jitpack.io") }
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
   }

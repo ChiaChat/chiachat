@@ -4,15 +4,13 @@ object Versions {
   const val ktlint = "10.2.1"
   const val coroutines = "1.6.4"
   const val ktor = "2.0.1"
-  const val protobuf = "1.3.0-RC"
-  const val json = "1.3.2"
   const val mockito = "3.12.4"
   const val mockito_kotlin = "4.0.0"
   const val sqlDelight = "2.0.0-alpha04"
   const val postgres = "42.3.4"
   const val koin = "3.2.0-beta-1"
   const val junit = "5.8.2"
-  const val proguard = "7.2.1"
+  const val proguard = "7.2.2"
   const val junitAndroid = "1.8.2.0"
   const val kermit = "1.1.2"
   const val kover = "0.5.1"
@@ -29,6 +27,7 @@ object Versions {
   const val okio = "3.2.0"
   const val ktfmtGradle = "0.11.0"
   const val conveyor = "1.2"
+  const val kotlinxSerialization = "1.4.1"
 }
 
 object Plugin {
@@ -89,8 +88,8 @@ object Deps {
 
   object Kotlinx {
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
-    const val protobuf = "org.jetbrains.kotlinx:kotlinx-serialization-protobuf:${Versions.protobuf}"
-    const val json = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.json}"
+    const val protobuf = "org.jetbrains.kotlinx:kotlinx-serialization-protobuf:${Versions.kotlinxSerialization}"
+    const val json = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinxSerialization}"
   }
 
   object Ktor {
