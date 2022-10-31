@@ -24,7 +24,6 @@ kotlin {
     val commonMain by getting {
       dependencies {
         api(Deps.Log.kermit)
-        api(Deps.Apollo.runtime)
         api(Deps.Kotlinx.coroutines)
         api(Deps.Koin.core)
         api(Deps.Kor.korio)

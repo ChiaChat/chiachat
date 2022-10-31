@@ -21,13 +21,16 @@ plugins {
   id(Plugin.Id.ktfmt) version Versions.ktfmtGradle
 }
 
-dependencies { detektPlugins(Plugin.detektFormatting) }
+group = "org.chiachat"
+version = "1.0.0"
+
 
 allprojects {
   repositories {
     google()
     mavenLocal()
     mavenCentral()
+    maven { url = uri("https://jitpack.io") }
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
   }
 }
@@ -35,7 +38,7 @@ allprojects {
 val rootPackage = "org.chiachat.app"
 val basePackage = listOf("*", "").map { "$rootPackage.it" }
 val excludedPackages =
-    listOf("type", "selections", "adapter", "apollo", "test", "android.test", "compose", "").map {
+    listOf("type", "selections", "adapter", "test", "android.test", "compose", "").map {
       "$rootPackage.$it.*"
     } + "*.BuildConfig" + "*.MainActivity" + "*.**Test"
 

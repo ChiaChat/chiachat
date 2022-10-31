@@ -15,7 +15,6 @@ object Versions {
   const val proguard = "7.2.1"
   const val junitAndroid = "1.8.2.0"
   const val kermit = "1.1.2"
-  const val apollo = "3.3.2"
   const val kover = "0.5.1"
   const val mockmp = "1.8.0"
   const val compose = "1.3.0"
@@ -28,7 +27,8 @@ object Versions {
   const val cognitoIdp = "2.5.0"
   const val kor = "3.3.0"
   const val okio = "3.2.0"
-  val ktfmtGradle = "0.11.0"
+  const val ktfmtGradle = "0.11.0"
+  const val conveyor = "1.2"
 }
 
 object Plugin {
@@ -37,12 +37,12 @@ object Plugin {
     val ktlint = "org.jlleitschuh.gradle.ktlint"
     val sqlDelight = "app.cash.sqldelight"
     val junit5 = "de.mannodermaus.android-junit5"
-    val apollo = "com.apollographql.apollo3"
     val kover = "org.jetbrains.kotlinx.kover"
     val mockmp = "org.kodein.mock.mockmp"
     val compose = "org.jetbrains.compose"
     val mokoResources = "dev.icerock.mobile.multiplatform-resources"
     val ktfmt = "com.ncorti.ktfmt.gradle"
+    val conveyor = "dev.hydraulic.conveyor"
   }
 
   val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
@@ -51,7 +51,6 @@ object Plugin {
   val sqlDelight = "app.cash.sqldelight:gradle-plugin:${Versions.sqlDelight}"
   val proguard = "com.guardsquare:proguard-gradle:${Versions.proguard}"
   val junitAndroid = "de.mannodermaus.gradle.plugins:android-junit5:${Versions.junitAndroid}"
-  val apollo = "com.apollographql.apollo3:apollo-gradle-plugin:${Versions.apollo}"
   val kover = "org.jetbrains.kotlinx:kover:${Versions.kover}"
 }
 
@@ -60,14 +59,6 @@ object Deps {
     const val core = "io.insert-koin:koin-core:${Versions.koin}"
     const val android = "io.insert-koin:koin-android:${Versions.koin}"
     const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
-  }
-
-  object Apollo {
-    const val runtime = "com.apollographql.apollo3:apollo-runtime:${Versions.apollo}"
-    const val normalizedCache =
-        "com.apollographql.apollo3:apollo-normalized-cache-sqlite:${Versions.apollo}"
-    const val api = "com.apollographql.apollo3:apollo-api:${Versions.apollo}"
-    const val mock_server = "com.apollographql.apollo3:apollo-mockserver:${Versions.apollo}"
   }
 
   object Androidx {
