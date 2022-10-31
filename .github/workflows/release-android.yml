@@ -20,9 +20,9 @@ jobs:
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
-              - uses: softprops/action-gh-release@v1
-                with:
-                  files: |
-                    androidApp/build/outputs/apk/release/*.apk
+      - uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            androidApp/build/outputs/apk/release/*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
