@@ -15,12 +15,11 @@ import kotlinx.coroutines.launch
 import org.chiachat.app.compose.navigation.NavigationService
 import org.chiachat.app.compose.theme.ChiaChatTheme
 import org.chiachat.app.compose.theme.ThemeResources
-import org.chiachat.app.compose.theme.loadOxygen
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 fun loadResourcesDefault(resources: MutableStateFlow<ThemeResources>) {
-  CoroutineScope(Dispatchers.Default).launch { resources.value = ThemeResources(loadOxygen()) }
+  CoroutineScope(Dispatchers.Default).launch { resources.value = ThemeResources() }
 }
 
 class ComposeApp(
@@ -37,7 +36,7 @@ class ComposeApp(
   @Composable
   fun View() {
     val res by themeResources.collectAsState()
-    ChiaChatTheme(res) {
+    ChiaChatTheme() {
       Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         navigationService.currentView()
       }
