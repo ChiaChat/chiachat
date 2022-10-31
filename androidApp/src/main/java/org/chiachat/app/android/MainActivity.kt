@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import org.chiachat.app.SharedAppModules
 import org.chiachat.app.compose.ComposeApp
 import org.chiachat.app.compose.ComposeAppModules
-import org.chiachat.app.compose.navigation.NavigationService
+import org.chiachat.app.compose.services.NavigationService
 import org.chiachat.app.compose.theme.ThemeResources
 import org.chiachat.app.compose.theme.loadOxygen
 import org.koin.core.component.KoinComponent

@@ -1,4 +1,4 @@
-package org.chiachat.app.compose.navigation
+package org.chiachat.app.compose.services
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState

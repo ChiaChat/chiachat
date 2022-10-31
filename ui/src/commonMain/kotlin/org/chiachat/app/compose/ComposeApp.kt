@@ -12,7 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import org.chiachat.app.compose.navigation.NavigationService
+import org.chiachat.app.compose.services.NavigationService
 import org.chiachat.app.compose.theme.ChiaChatTheme
 import org.chiachat.app.compose.theme.ThemeResources
 import org.koin.core.component.KoinComponent
