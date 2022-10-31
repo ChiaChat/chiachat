@@ -18,9 +18,7 @@ kotlin {
         api(project(":shared"))
         api(compose.ui)
         api(compose.foundation)
-        //                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-        //                api(compose.material)
-        api(compose.material)
+        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class) api(compose.material3)
         api(compose.runtime)
       }
     }

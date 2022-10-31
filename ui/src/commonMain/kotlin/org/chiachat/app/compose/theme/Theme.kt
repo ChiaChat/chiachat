@@ -1,7 +1,7 @@
 package org.chiachat.app.compose.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
 import com.soywiz.korio.file.std.resourcesVfs
@@ -20,7 +20,7 @@ suspend fun loadThemeResources(): ThemeResources {
 @Composable
 fun ChiaChatTheme(resources: ThemeResources, content: @Composable () -> Unit) {
   MaterialTheme(
-      colors = if (isSystemInDarkTheme()) chiachatDarkScheme else chiachatDarkScheme,
-      typography = ChiaChatTypography(resources),
+      colorScheme = if (isSystemInDarkTheme()) matteBlackDarkScheme else  matteBlackLightScheme,
+//      typography = ChiaChatTypography(resources),
       content = content)
 }

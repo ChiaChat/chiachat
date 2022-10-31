@@ -70,7 +70,7 @@ object Deps {
     const val uiGraphics = "androidx.compose.ui:ui-graphics:${Versions.compose}"
     const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
     const val foundationLayout = "androidx.compose.foundation:foundation-layout:${Versions.compose}"
-    const val material = "androidx.compose.material:material:${Versions.compose}"
+    const val material = "androidx.compose.material3:material:${Versions.compose}"
     const val navigation = "androidx.navigation:navigation-compose:${Versions.navCompose}"
 
     const val coilCompose = "io.coil-kt:coil-compose:2.0.0"

@@ -1,8 +1,13 @@
 package org.chiachat.app.compose
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,6 +37,10 @@ class ComposeApp(
   @Composable
   fun View() {
     val res by themeResources.collectAsState()
-    ChiaChatTheme(res) { navigationService.currentView() }
+    ChiaChatTheme(res) {
+      Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+        navigationService.currentView()
+      }
+    }
   }
 }
