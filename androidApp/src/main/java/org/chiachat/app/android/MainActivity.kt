@@ -14,7 +14,6 @@ import org.chiachat.app.compose.ComposeApp
 import org.chiachat.app.compose.ComposeAppModules
 import org.chiachat.app.compose.services.NavigationService
 import org.chiachat.app.compose.theme.ThemeResources
-import org.chiachat.app.compose.theme.loadOxygen
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
@@ -45,7 +44,7 @@ class MainActivity : ComponentActivity(), KoinComponent {
 
   fun loadThemeResources(resources: MutableStateFlow<ThemeResources>) {
     CoroutineScope(Dispatchers.IO).launch {
-      withAndroidContext(mainActivity) { resources.value = ThemeResources(loadOxygen()) }
+      withAndroidContext(mainActivity) { resources.value = ThemeResources() }
     }
   }
 }
