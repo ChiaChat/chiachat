@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Application
 import kotlinx.cinterop.*
-import org.chiachat.app.compose.ComposeApp
+import org.chiachat.app.compose.ComposeRoot
 import platform.Foundation.*
 import platform.UIKit.*
 
@@ -38,8 +38,8 @@ class SkikoAppDelegate : UIResponder, UIApplicationDelegateProtocol {
       didFinishLaunchingWithOptions: Map<Any?, *>?
   ): Boolean {
     window = UIWindow(frame = UIScreen.mainScreen.bounds)
-    val app = ComposeApp()
-    val mainComponent = ComposeApp()
+    val app = ComposeRoot()
+    val mainComponent = ComposeRoot()
     window!!.rootViewController =
         Application("chiachat") {
           Column {

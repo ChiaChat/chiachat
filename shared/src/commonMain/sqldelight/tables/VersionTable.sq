@@ -1,0 +1,5 @@
+setVersion:
+UPDATE VersionTable SET version = ?;
+
+getVersion:
+SELECT version FROM VersionTable LIMIT 1;

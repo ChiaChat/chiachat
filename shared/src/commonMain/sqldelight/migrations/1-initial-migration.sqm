@@ -1,0 +1,5 @@
+CREATE TABLE VersionTable(
+    version INTEGER PRIMARY KEY
+);
+
+INSERT INTO VersionTable(version) VALUES (1);

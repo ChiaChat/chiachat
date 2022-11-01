@@ -1,24 +1,18 @@
 plugins {
   kotlin("multiplatform")
-  kotlin("native.cocoapods")
+  id("app.cash.sqldelight") version "2.0.0-alpha04"
+  id("com.android.library")
 }
 
 version = "1.0"
 
 kotlin {
   jvm()
-  js(IR) { browser { commonWebpackConfig { cssSupport.enabled = true } } }
+  js(IR) { browser {} }
+  android()
   iosArm64()
   iosX64()
   iosSimulatorArm64()
-
-  cocoapods {
-    summary = "Some description for the shared Module"
-    homepage = "Link to the shared Module homepage"
-    ios.deploymentTarget = "14.0"
-    podfile = project.file("../iosApp/Podfile")
-    framework { baseName = "shared" }
-  }
 
   sourceSets {
     val commonMain by getting {
@@ -35,10 +29,13 @@ kotlin {
         with(Deps.Test) { api(coroutines) }
       }
     }
-    val jvmMain by getting { dependencies {} }
+    val jvmMain by getting { dependencies { api(Deps.Sqldelight.sqliteJvmDriver) } }
     val jvmTest by getting
-    val jsMain by getting
+    val jsMain by getting { dependencies { api(Deps.Sqldelight.sqliteJsDriver) } }
     val jsTest by getting
+    val androidMain by getting {
+       dependencies { api(Deps.Sqldelight.sqliteAndroidDriver) }
+    }
     val iosX64Main by getting
     val iosArm64Main by getting
     val iosSimulatorArm64Main by getting
@@ -47,6 +44,8 @@ kotlin {
       iosX64Main.dependsOn(this)
       iosArm64Main.dependsOn(this)
       iosSimulatorArm64Main.dependsOn(this)
+
+      dependencies { api(Deps.Sqldelight.sqliteNativeDriver) }
     }
     val iosX64Test by getting
     val iosArm64Test by getting
@@ -57,5 +56,23 @@ kotlin {
       iosArm64Test.dependsOn(this)
       iosSimulatorArm64Test.dependsOn(this)
     }
+  }
+}
+
+sqldelight {
+  database("ChiaChatDb") { // This will be the name of the generated database class.
+    packageName = "org.chiachat.app"
+    dialect(Deps.Sqldelight.sqliteDialect)
+    deriveSchemaFromMigrations = true
+    verifyMigrations = true
+  }
+}
+
+
+android {
+  compileSdk = 33
+  defaultConfig {
+    minSdk = 24
+    targetSdk = 33
   }
 }

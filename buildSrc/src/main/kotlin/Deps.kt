@@ -128,6 +128,11 @@ object Deps {
     const val postgresDialect = "app.cash.sqldelight:postgresql-dialect:${Versions.sqlDelight}"
     const val jdbcDriver = "app.cash.sqldelight:jdbc-driver:${Versions.sqlDelight}"
     const val postgresDriver = "org.postgresql:postgresql:${Versions.postgres}"
+    const val sqliteDialect = "app.cash.sqldelight:sqlite-3-38-dialect:${Versions.sqlDelight}"
+    const val sqliteJsDriver = "app.cash.sqldelight:sqljs-driver:${Versions.sqlDelight}"
+    const val sqliteJvmDriver = "app.cash.sqldelight:sqlite-driver:${Versions.sqlDelight}"
+    const val sqliteNativeDriver = "app.cash.sqldelight:native-driver:${Versions.sqlDelight}"
+    const val sqliteAndroidDriver = "app.cash.sqldelight:android-driver:${Versions.sqlDelight}"
   }
 
   object Network {

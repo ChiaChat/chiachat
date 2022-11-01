@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import org.chiachat.app.SharedAppModules
-import org.chiachat.app.compose.ComposeApp
+import org.chiachat.app.compose.ComposeRoot
 import org.chiachat.app.compose.ComposeAppModules
 import org.chiachat.app.compose.services.NavigationService
 import org.chiachat.app.compose.theme.ThemeResources
@@ -22,7 +22,7 @@ import org.koin.dsl.module
 class MainActivity : ComponentActivity(), KoinComponent {
   val mainActivity = this
   val androidModule = module { single { mainActivity } }
-  val app = ComposeApp(loadResources = ::loadThemeResources)
+  val app = ComposeRoot(loadResources = ::loadThemeResources)
 
   val navigationService: NavigationService by inject()
 

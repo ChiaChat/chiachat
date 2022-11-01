@@ -49,7 +49,7 @@ val icns = File("../shared/src/commonMain/resources/icons/chiachat-trans-256x256
 val png = File("../shared/src/commonMain/resources/icons/chiachat-trans-256x256.png")
 compose.desktop {
   application {
-    mainClass = "MainKt"
+    mainClass = "org.chiachat.app.desktop.MainKt"
     buildTypes.release.proguard {
       configurationFiles.from(project.file("compose-desktop.pro"))
     }
