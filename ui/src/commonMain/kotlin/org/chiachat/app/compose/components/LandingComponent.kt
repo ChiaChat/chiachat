@@ -4,17 +4,19 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.soywiz.korio.file.std.resourcesVfs
 import org.chiachat.app.compose.composables.ProfileCard
-import org.chiachat.app.user.UserProfile
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 
-class LandingComponent : Component() {
-  val demoUser =
-      UserProfile("Andrea Bueide", "0x1234567890123456", resourcesVfs["previews/dazai-pfp.png"])
+class LandingComponent(val vm: LandingViewModel = LandingViewModel()) : Component(), KoinComponent {
+
   @Composable
   override fun view() {
     Column(
@@ -29,6 +31,11 @@ class LandingComponent : Component() {
 
   @Composable
   fun screen() {
-    ProfileCard(demoUser)
+      val image by vm.image.collectAsState()
+      if(image == null){
+          Text("Loading Image")
+      }else {
+          ProfileCard(demoUser, image)
+      }
   }
 }

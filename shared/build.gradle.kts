@@ -33,9 +33,7 @@ kotlin {
     val jvmTest by getting
     val jsMain by getting { dependencies { api(Deps.Sqldelight.sqliteJsDriver) } }
     val jsTest by getting
-    val androidMain by getting {
-       dependencies { api(Deps.Sqldelight.sqliteAndroidDriver) }
-    }
+    val androidMain by getting { dependencies { api(Deps.Sqldelight.sqliteAndroidDriver) } }
     val iosX64Main by getting
     val iosArm64Main by getting
     val iosSimulatorArm64Main by getting
@@ -67,7 +65,6 @@ sqldelight {
     verifyMigrations = true
   }
 }
-
 
 android {
   compileSdk = 33

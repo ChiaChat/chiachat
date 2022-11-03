@@ -22,20 +22,11 @@ fun loadResourcesDefault(resources: MutableStateFlow<ThemeResources>) {
   CoroutineScope(Dispatchers.Default).launch { resources.value = ThemeResources() }
 }
 
-class ComposeRoot(
-    loadResources: (MutableStateFlow<ThemeResources>) -> Unit = ::loadResourcesDefault
-) : KoinComponent {
+class ComposeRoot: KoinComponent {
   val navigationService: NavigationService by inject()
-
-  val themeResources = MutableStateFlow(ThemeResources())
-
-  init {
-    loadResources(themeResources)
-  }
 
   @Composable
   fun View() {
-    val res by themeResources.collectAsState()
     AppTheme() {
       Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         navigationService.currentView()
