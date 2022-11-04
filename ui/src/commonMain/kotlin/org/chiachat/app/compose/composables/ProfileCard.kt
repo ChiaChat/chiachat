@@ -11,12 +11,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
-import androidx.compose.ui.graphics.toComposeImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.CoroutineScope
 import org.chiachat.app.user.UserProfile
-import org.jetbrains.skia.Image.Companion.makeFromEncoded
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,7 +33,7 @@ fun ProfileCard(profile: UserProfile, image: ImageBitmap?) {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.fillMaxWidth()) {
           if (image != null) {
-//            val image = makeFromEncoded(imageData).toComposeImageBitmap()
+            //            val image = makeFromEncoded(imageData).toComposeImageBitmap()
             Image(
                 painter = BitmapPainter(image),
                 contentDescription = "Sample",

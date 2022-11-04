@@ -5,6 +5,8 @@ plugins {
   id("org.jetbrains.compose") version Versions.composeMultiplatform
 }
 
+val resPath = "src/commonMain/resources"
+
 kotlin {
   js(IR) {
     browser()
@@ -17,6 +19,11 @@ kotlin {
         implementation(project(":ui"))
         implementation(compose.web.core)
       }
+      this.resources.setSrcDirs(
+          listOf(
+              project(":shared").file(resPath),
+              project(":ui").file(resPath),
+              project.file("src/jsMain/resources")))
     }
     val jsTest by getting
   }

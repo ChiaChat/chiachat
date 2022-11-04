@@ -9,6 +9,8 @@ import org.chiachat.app.compose.ComposeAppModule
 import org.chiachat.app.compose.ComposeRoot
 import org.khronos.webgl.WebGLRenderingContext
 import org.koin.core.context.startKoin
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 import org.w3c.dom.HTMLCanvasElement
 
 class WebApp {
@@ -18,11 +20,14 @@ class WebApp {
   val canvas = window.document.getElementById("ComposeTarget") as HTMLCanvasElement
   val ctx = canvas.getContext("webgl") as WebGLRenderingContext
 
-  val ioScope = CoroutineScope(Dispatchers.Default)
+  val platformModule = module {
+    factory(named("ioScope")) { CoroutineScope(Dispatchers.Default) }
+    factory(named("vmScope")) { CoroutineScope(Dispatchers.Default) }
+  }
 
   init {
-    startKoin{
-      modules(SharedAppModules.sharedModule, ComposeAppModule.composeModule)
+    startKoin {
+      modules(SharedAppModules.sharedModule, ComposeAppModule.composeModule, platformModule)
       allowOverride(false)
     }
     resizeCanvas()

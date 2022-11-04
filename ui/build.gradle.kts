@@ -1,6 +1,7 @@
 plugins {
   kotlin("multiplatform")
   id("org.jetbrains.compose") version Versions.composeMultiplatform
+  id("com.android.library")
 }
 
 version = "1.0"
@@ -8,6 +9,7 @@ version = "1.0"
 kotlin {
   jvm()
   js(IR) { browser { commonWebpackConfig { cssSupport.enabled = true } } }
+  android()
   iosArm64()
   iosX64()
   iosSimulatorArm64()
@@ -23,10 +25,23 @@ kotlin {
       }
     }
     val commonTest by getting { dependencies { implementation(kotlin("test")) } }
-    val jvmMain by getting { dependsOn(commonMain) }
+    val jvmMain by getting {
+      dependsOn(commonMain)
+      dependencies { implementation(compose.preview) }
+    }
     val jvmTest by getting
-    val jsMain by getting
+    val jsMain by getting {
+      dependsOn(commonMain)
+    }
     val jsTest by getting
+    val androidMain by getting {
+      dependsOn(commonMain)
+      dependencies {
+        api("androidx.appcompat:appcompat:1.5.1")
+        api("androidx.core:core-ktx:1.9.0")
+        api("androidx.compose.ui:ui-graphics:1.4.0-alpha01")
+      }
+    }
     val iosX64Main by getting
     val iosArm64Main by getting
     val iosSimulatorArm64Main by getting
@@ -44,6 +59,28 @@ kotlin {
       iosX64Test.dependsOn(this)
       iosArm64Test.dependsOn(this)
       iosSimulatorArm64Test.dependsOn(this)
+    }
+  }
+}
+
+android {
+  compileSdk = 33
+
+  defaultConfig {
+    minSdk = 26
+    targetSdk = 33
+  }
+
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+  }
+
+  sourceSets {
+    named("main") {
+      manifest.srcFile("src/androidMain/AndroidManifest.xml")
+      res.srcDirs("src/androidMain/res")
+      assets.srcDirs("src/commonMain/resources")
     }
   }
 }

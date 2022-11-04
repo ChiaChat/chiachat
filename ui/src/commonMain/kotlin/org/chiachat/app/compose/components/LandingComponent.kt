@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.chiachat.app.compose.composables.ProfileCard
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.get
 
 class LandingComponent(val vm: LandingViewModel = LandingViewModel()) : Component(), KoinComponent {
 
@@ -31,11 +30,11 @@ class LandingComponent(val vm: LandingViewModel = LandingViewModel()) : Componen
 
   @Composable
   fun screen() {
-      val image by vm.image.collectAsState()
-      if(image == null){
-          Text("Loading Image")
-      }else {
-          ProfileCard(demoUser, image)
-      }
+    val image by vm.image.collectAsState()
+    if (image == null) {
+      Text("Loading Image")
+    } else {
+      ProfileCard(demoUser, image)
+    }
   }
 }

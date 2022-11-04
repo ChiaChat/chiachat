@@ -8,7 +8,7 @@ jobs:
   gradle:
     strategy:
       matrix:
-        os: [macos-latest]
+        os: [ macos-latest ]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -19,10 +19,10 @@ jobs:
       - uses: gradle/gradle-build-action@v2.3.3
         with:
           arguments: iosApp:linkReleaseExecutableUikitArm64
-#      - uses: softprops/action-gh-release@v1
-#        with:
-#          files: |
-#            desktopApp/build/compose/binaries/main-release/**/*.*
-#            LICENSE
+        #      - uses: softprops/action-gh-release@v1
+        #        with:
+        #          files: |
+        #            desktopApp/build/compose/binaries/main-release/**/*.*
+        #            LICENSE
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

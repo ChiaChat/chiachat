@@ -5,16 +5,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.addCallback
 import androidx.activity.compose.setContent
 import com.soywiz.korio.android.AndroidCoroutineContext
-import com.soywiz.korio.android.withAndroidContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 import org.chiachat.app.SharedAppModules
 import org.chiachat.app.compose.ComposeAppModule
 import org.chiachat.app.compose.ComposeRoot
 import org.chiachat.app.compose.services.NavigationService
-import org.chiachat.app.compose.theme.ThemeResources
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
@@ -32,7 +28,6 @@ class MainActivity : ComponentActivity(), KoinComponent {
   val app = ComposeRoot()
 
   val navigationService: NavigationService by inject()
-
 
   init {
     startKoin {

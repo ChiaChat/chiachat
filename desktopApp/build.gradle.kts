@@ -13,11 +13,7 @@ repositories {
   maven { url = uri("https://maven.pkg.jetbrains.space/public/p/compose/dev") }
 }
 
-java {
-  toolchain {
-    languageVersion.set(JavaLanguageVersion.of(17))
-  }
-}
+java { toolchain { languageVersion.set(JavaLanguageVersion.of(17)) } }
 
 kotlin {
   jvm {
@@ -37,32 +33,28 @@ kotlin {
 }
 
 dependencies {
-  // Use the configurations created by the Conveyor plugin to tell Gradle/Conveyor where to find the artifacts for each platform.
+  // Use the configurations created by the Conveyor plugin to tell Gradle/Conveyor where to find the
+  // artifacts for each platform.
   linuxAmd64(compose.desktop.linux_x64)
   macAmd64(compose.desktop.macos_x64)
   macAarch64(compose.desktop.macos_arm64)
   windowsAmd64(compose.desktop.windows_x64)
 }
 
-val ico = File("../shared/src/commonMain/resources/icons/chiachat-trans-256x256.ico")
-val icns = File("../shared/src/commonMain/resources/icons/chiachat-trans-256x256.icns")
-val png = File("../shared/src/commonMain/resources/icons/chiachat-trans-256x256.png")
+val ico = File("../ui/src/commonMain/resources/icons/chiachat-trans-256x256.ico")
+val icns = File("../ui/src/commonMain/resources/icons/chiachat-trans-256x256.icns")
+val png = File("../ui/src/commonMain/resources/icons/chiachat-trans-256x256.png")
+
 compose.desktop {
   application {
     mainClass = "org.chiachat.app.desktop.MainKt"
-    buildTypes.release.proguard {
-      configurationFiles.from(project.file("compose-desktop.pro"))
-    }
+//    buildTypes.release.proguard { configurationFiles.from(project.file("compose-desktop.pro")) }
     nativeDistributions {
       targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
       packageName = "ChiaChat"
       packageVersion = "1.0.0"
-      macOS {
-        iconFile.set(icns)
-      }
-      windows {
-        iconFile.set(ico)
-      }
+      macOS { iconFile.set(icns) }
+      windows { iconFile.set(ico) }
       linux {
         iconFile.set(png)
         packageName = "chia-chat"
@@ -80,8 +72,10 @@ configurations.all {
 }
 
 dependencies {
-  // Force override the Kotlin stdlib version used by Compose to 1.7 in the machine specific configurations, as otherwise we can end up
-  // with a mix of 1.6 and 1.7 on our classpath. This is the same logic as is applied to the regular Compose configurations normally.
+  // Force override the Kotlin stdlib version used by Compose to 1.7 in the machine specific
+  // configurations, as otherwise we can end up
+  // with a mix of 1.6 and 1.7 on our classpath. This is the same logic as is applied to the regular
+  // Compose configurations normally.
   val v = "1.7.10"
   for (m in setOf("linuxAmd64", "macAmd64", "macAarch64", "windowsAmd64")) {
     m("org.jetbrains.kotlin:kotlin-stdlib:$v")
