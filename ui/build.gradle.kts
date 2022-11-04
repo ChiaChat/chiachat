@@ -30,9 +30,7 @@ kotlin {
       dependencies { implementation(compose.preview) }
     }
     val jvmTest by getting
-    val jsMain by getting {
-      dependsOn(commonMain)
-    }
+    val jsMain by getting { dependsOn(commonMain) }
     val jsTest by getting
     val androidMain by getting {
       dependsOn(commonMain)

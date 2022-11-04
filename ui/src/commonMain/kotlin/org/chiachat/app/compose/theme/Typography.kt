@@ -1,12 +1,7 @@
 package org.chiachat.app.compose.theme
 
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import com.soywiz.korio.file.VfsFile
-import com.soywiz.korio.file.baseName
-import com.soywiz.korio.file.baseNameWithoutExtension
-import com.soywiz.korio.file.std.resourcesVfs
 import kotlinx.coroutines.flow.MutableStateFlow
 
 // Set of Material typography styles to start with

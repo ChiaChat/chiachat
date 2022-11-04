@@ -48,7 +48,8 @@ val png = File("../ui/src/commonMain/resources/icons/chiachat-trans-256x256.png"
 compose.desktop {
   application {
     mainClass = "org.chiachat.app.desktop.MainKt"
-//    buildTypes.release.proguard { configurationFiles.from(project.file("compose-desktop.pro")) }
+    //    buildTypes.release.proguard { configurationFiles.from(project.file("compose-desktop.pro"))
+    // }
     nativeDistributions {
       targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
       packageName = "ChiaChat"

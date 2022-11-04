@@ -4,7 +4,7 @@ enum class Platform {
   IOS,
   ANDROID,
   JVM,
-  JS;
+  JS
 }
 
 expect fun getPlatform(): Platform

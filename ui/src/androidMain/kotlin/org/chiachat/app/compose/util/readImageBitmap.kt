@@ -6,5 +6,5 @@ import androidx.compose.ui.graphics.asImageBitmap
 import com.soywiz.korio.file.VfsFile
 
 actual suspend fun VfsFile.readImageBitmap(): ImageBitmap {
-    return BitmapFactory.decodeByteArray(this.readAll(), 0, this.size().toInt()).asImageBitmap()
+  return BitmapFactory.decodeByteArray(this.readAll(), 0, this.size().toInt()).asImageBitmap()
 }
