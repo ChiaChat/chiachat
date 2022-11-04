@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -18,11 +19,13 @@ class LandingComponent(val vm: LandingViewModel = LandingViewModel()) : Componen
 
   @Composable
   override fun view() {
+    val dbVersion by vm.dbVersion.collectAsState()
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(10.dp)) {
           Spacer(modifier = Modifier.weight(1f))
+          dbVersion?.let { Text(text = "Db Version: $it", color = MaterialTheme.colorScheme.onBackground)}
           screen()
           Spacer(modifier = Modifier.weight(1f))
         }

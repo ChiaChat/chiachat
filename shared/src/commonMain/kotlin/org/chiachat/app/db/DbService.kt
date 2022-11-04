@@ -4,7 +4,6 @@ import app.cash.sqldelight.db.SqlDriver
 import org.chiachat.app.ChiaChatDb
 
 class DbService(val db: ChiaChatDb, val driver: SqlDriver) {
-
   init {
     runMigrations()
   }

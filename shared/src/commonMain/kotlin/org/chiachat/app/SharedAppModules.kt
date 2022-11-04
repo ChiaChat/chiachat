@@ -8,6 +8,7 @@ import org.koin.dsl.module
 
 object SharedAppModules {
   val sharedModule = module {
+    single { ChiaChatDb.invoke(get()) }
     singleOf(::ToastService)
     singleOf(::DbService)
     resourcesVfs
