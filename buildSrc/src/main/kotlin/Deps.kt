@@ -1,28 +1,27 @@
 object Versions {
-  const val kotlin = "1.7.10"
+  const val kotlin = "1.7.20"
   const val detekt = "1.22.0-RC2"
   const val ktlint = "10.2.1"
   const val coroutines = "1.6.4"
-  const val ktor = "2.0.1"
+  const val ktor = "2.1.3"
   const val mockito = "3.12.4"
   const val mockito_kotlin = "4.0.0"
   const val sqlDelight = "2.0.0-alpha04"
   const val postgres = "42.3.4"
-  const val koin = "3.2.0-beta-1"
-  const val junit = "5.8.2"
+  const val koin = "3.2.2"
+  const val junit = "5.9.1"
   const val proguard = "7.2.2"
   const val junitAndroid = "1.8.2.0"
-  const val kermit = "1.1.2"
-  const val kover = "0.5.1"
+  const val kermit = "1.1.3"
+  const val kover = "0.6.1"
   const val mockmp = "1.8.0"
   const val compose = "1.3.0"
   const val composeCompiler = "1.3.0"
   const val activityCompose = "1.4.0-beta01"
   const val navCompose = "2.4.2"
   const val accompanist = "0.24.11-rc"
-  const val composeMultiplatform = "1.2.0"
+  const val composeMultiplatform = "1.2.1-rc03"
   const val nativeCoroutines = "0.12.5"
-  const val cognitoIdp = "2.5.0"
   const val kor = "3.3.0"
   const val okio = "3.2.0"
   const val ktfmtGradle = "0.11.0"
@@ -32,16 +31,16 @@ object Versions {
 
 object Plugin {
   object Id {
-    val detekt = "io.gitlab.arturbosch.detekt"
-    val ktlint = "org.jlleitschuh.gradle.ktlint"
-    val sqlDelight = "app.cash.sqldelight"
-    val junit5 = "de.mannodermaus.android-junit5"
-    val kover = "org.jetbrains.kotlinx.kover"
-    val mockmp = "org.kodein.mock.mockmp"
-    val compose = "org.jetbrains.compose"
-    val mokoResources = "dev.icerock.mobile.multiplatform-resources"
-    val ktfmt = "com.ncorti.ktfmt.gradle"
-    val conveyor = "dev.hydraulic.conveyor"
+    const val detekt = "io.gitlab.arturbosch.detekt"
+    const val ktlint = "org.jlleitschuh.gradle.ktlint"
+    const val sqlDelight = "app.cash.sqldelight"
+    const val junit5 = "de.mannodermaus.android-junit5"
+    const val kover = "org.jetbrains.kotlinx.kover"
+    const val mockmp = "org.kodein.mock.mockmp"
+    const val compose = "org.jetbrains.compose"
+    const val mokoResources = "dev.icerock.mobile.multiplatform-resources"
+    const val ktfmt = "com.ncorti.ktfmt.gradle"
+    const val conveyor = "dev.hydraulic.conveyor"
   }
 
   val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
@@ -124,6 +123,8 @@ object Deps {
     const val junitApi = "org.junit.jupiter:junit-jupiter-api:${Versions.junit}"
     const val junitEngine = "org.junit.jupiter:junit-jupiter-engine:${Versions.junit}"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
+    const val koin = "io.insert-koin:koin-test:${Versions.koin}"
+    const val koinJvm = "io.insert-koin:koin-test-junit5:${Versions.koin}"
   }
 
   object Sqldelight {
@@ -135,9 +136,5 @@ object Deps {
     const val sqliteJvmDriver = "app.cash.sqldelight:sqlite-driver:${Versions.sqlDelight}"
     const val sqliteNativeDriver = "app.cash.sqldelight:native-driver:${Versions.sqlDelight}"
     const val sqliteAndroidDriver = "app.cash.sqldelight:android-driver:${Versions.sqlDelight}"
-  }
-
-  object Network {
-    const val cognito = "com.liftric:cognito-idp:${Versions.cognitoIdp}"
   }
 }

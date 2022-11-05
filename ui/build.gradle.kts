@@ -24,22 +24,22 @@ kotlin {
         api(compose.runtime)
       }
     }
-    val commonTest by getting { dependencies { implementation(kotlin("test")) } }
+    val commonTest by getting { dependencies { implementation(project(":shared")) } }
     val jvmMain by getting {
       dependsOn(commonMain)
       dependencies { implementation(compose.preview) }
     }
-    val jvmTest by getting
+    val jvmTest by getting { dependencies { api(project(":shared")) } }
     val jsMain by getting { dependsOn(commonMain) }
     val jsTest by getting
     val androidMain by getting {
-      dependsOn(commonMain)
       dependencies {
-        api("androidx.appcompat:appcompat:1.5.1")
-        api("androidx.core:core-ktx:1.9.0")
-        api("androidx.compose.ui:ui-graphics:1.4.0-alpha01")
+        implementation("androidx.appcompat:appcompat:1.5.1")
+        implementation("androidx.core:core-ktx:1.9.0")
+        implementation("androidx.compose.ui:ui-graphics:1.4.0-alpha01")
       }
     }
+    val androidTest by getting
     val iosX64Main by getting
     val iosArm64Main by getting
     val iosSimulatorArm64Main by getting
@@ -67,11 +67,12 @@ android {
   defaultConfig {
     minSdk = 26
     targetSdk = 33
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
   }
 
   sourceSets {
@@ -81,4 +82,5 @@ android {
       assets.srcDirs("src/commonMain/resources")
     }
   }
+  namespace = "org.chiachat.app.ui"
 }

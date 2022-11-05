@@ -10,8 +10,8 @@ class NavigationService(initialScreen: Component, val maxScreens: Int = 10) {
 
   private val screenTree: MutableList<Component> = mutableListOf()
   private val currentScreenIndex: MutableState<Int> = mutableStateOf(0)
-  private val currentScreen_: MutableState<Component?> = mutableStateOf(null)
-  val currentScreen: State<Component?> = currentScreen_
+  private val _currentScreen: MutableState<Component?> = mutableStateOf(null)
+  val currentScreen: State<Component?> = _currentScreen
 
   init {
     navigate(initialScreen)
@@ -61,7 +61,7 @@ class NavigationService(initialScreen: Component, val maxScreens: Int = 10) {
   // Keeps the screen observable in sync with the index. Must be called wherever the screen index is
   // changed.
   private fun updateScreen() {
-    currentScreen_.value = screenTree[currentScreenIndex.value]
+    _currentScreen.value = screenTree[currentScreenIndex.value]
   }
 
   @Composable

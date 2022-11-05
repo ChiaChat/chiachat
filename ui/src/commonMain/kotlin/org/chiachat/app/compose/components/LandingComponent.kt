@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import org.chiachat.app.compose.composables.ProfileCard
 import org.koin.core.component.KoinComponent
 
-class LandingComponent(val vm: LandingViewModel = LandingViewModel()) : Component(), KoinComponent {
+class LandingComponent(val vm: LandingViewModel = LandingViewModel()) : Component, KoinComponent {
 
   @Composable
   override fun view() {
@@ -25,7 +25,9 @@ class LandingComponent(val vm: LandingViewModel = LandingViewModel()) : Componen
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(10.dp)) {
           Spacer(modifier = Modifier.weight(1f))
-          dbVersion?.let { Text(text = "Db Version: $it", color = MaterialTheme.colorScheme.onBackground)}
+          dbVersion?.let {
+            Text(text = "Db Version: $it", color = MaterialTheme.colorScheme.onBackground)
+          }
           screen()
           Spacer(modifier = Modifier.weight(1f))
         }

@@ -1,22 +1,18 @@
 package org.chiachat.app.web
 
 import androidx.compose.runtime.Composable
-import kotlinx.browser.window
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.chiachat.app.SharedAppModules
 import org.chiachat.app.compose.ComposeAppModule
 import org.chiachat.app.compose.ComposeRoot
-import org.khronos.webgl.WebGLRenderingContext
 import org.koin.core.context.startKoin
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import org.w3c.dom.HTMLCanvasElement
 
 class WebApp {
 
   val mainComponent = ComposeRoot()
-
 
   val platformModule = module {
     factory(named("ioScope")) { CoroutineScope(Dispatchers.Default) }

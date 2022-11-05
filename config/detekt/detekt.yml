@@ -10,6 +10,7 @@ build:
 config:
   validation: true
   warningsAsErrors: false
+  checkExhaustiveness: false
   # when writing own rules with new properties, exclude the property path e.g.: 'my_rule_set,.*>.*>[my_property]'
   excludes: ''
 
@@ -46,6 +47,7 @@ output-reports:
   # - 'TxtOutputReport'
   # - 'XmlOutputReport'
   # - 'HtmlOutputReport'
+  # - 'MdOutputReport'
 
 comments:
   active: true
@@ -77,12 +79,15 @@ comments:
     searchInInnerClass: true
     searchInInnerObject: true
     searchInInnerInterface: true
+    searchInProtectedClass: false
   UndocumentedPublicFunction:
     active: false
     excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
+    searchProtectedFunction: false
   UndocumentedPublicProperty:
     active: false
     excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
+    searchProtectedProperty: false
 
 complexity:
   active: true
@@ -94,22 +99,7 @@ complexity:
     threshold: 10
     includeStaticDeclarations: false
     includePrivateDeclarations: false
-  ComplexMethod:
-    active: true
-    threshold: 15
-    ignoreSingleWhenExpression: false
-    ignoreSimpleWhenEntries: false
-    ignoreNestingFunctions: false
-    nestingFunctions:
-      - 'also'
-      - 'apply'
-      - 'forEach'
-      - 'isNotNull'
-      - 'ifNull'
-      - 'let'
-      - 'run'
-      - 'use'
-      - 'with'
+    ignoreOverloaded: false
   LabeledExpression:
     active: false
     ignoredLabels: [ ]
@@ -319,9 +309,9 @@ naming:
     active: false
     minimumFunctionNameLength: 3
   FunctionNaming:
-    active: false
+    active: true
     excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
-    functionPattern: '[a-z][a-zA-Z0-9]*'
+    functionPattern: '[a-zA-Z0-9]*'
     excludeClassPattern: '$^'
     ignoreOverridden: true
   FunctionParameterNaming:
@@ -385,6 +375,8 @@ performance:
   SpreadOperator:
     active: true
     excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
+  UnnecessaryPartOfBinaryExpression:
+    active: false
   UnnecessaryTemporaryInstantiation:
     active: true
 
@@ -411,8 +403,6 @@ potential-bugs:
       - 'java.util.HashSet'
       - 'java.util.LinkedHashMap'
       - 'java.util.HashMap'
-  DuplicateCaseInWhenExpression:
-    active: true
   ElseCaseInsteadOfExhaustiveWhen:
     active: false
   EqualsAlwaysReturnsTrueOrFalse:
@@ -427,12 +417,16 @@ potential-bugs:
     active: true
   IgnoredReturnValue:
     active: true
-    restrictToAnnotatedMethods: true
+    restrictToConfig: true
     returnValueAnnotations:
       - '*.CheckResult'
       - '*.CheckReturnValue'
     ignoreReturnValueAnnotations:
       - '*.CanIgnoreReturnValue'
+    returnValueTypes:
+      - 'kotlin.sequences.Sequence'
+      - 'kotlinx.coroutines.flow.*Flow'
+      - 'java.util.stream.*Stream'
     ignoreFunctionCall: [ ]
   ImplicitDefaultLocale:
     active: true
@@ -454,16 +448,13 @@ potential-bugs:
   MissingPackageDeclaration:
     active: false
     excludes: [ '**/*.kts' ]
-  MissingWhenCase:
-    active: true
-    allowElseExpression: true
   NullCheckOnMutableProperty:
     active: false
   NullableToStringCall:
     active: false
-  RedundantElseInWhen:
-    active: true
   UnconditionalJumpStatementInLoop:
+    active: false
+  UnnecessaryNotNullCheck:
     active: false
   UnnecessaryNotNullOperator:
     active: true
@@ -487,15 +478,21 @@ potential-bugs:
 
 style:
   active: true
+  AlsoCouldBeApply:
+    active: false
   CanBeNonNullable:
     active: false
+  CascadingCallWrapping:
+    active: false
+    includeElvis: true
   ClassOrdering:
     active: false
   CollapsibleIfStatements:
     active: false
   DataClassContainsFunctions:
     active: false
-    conversionFunctionPrefix: 'to'
+    conversionFunctionPrefix:
+      - 'to'
   DataClassShouldBeImmutable:
     active: false
   DestructuringDeclarationWithTooManyEntries:
@@ -527,14 +524,13 @@ style:
   ForbiddenMethodCall:
     active: false
     methods:
-      - 'kotlin.io.print'
-      - 'kotlin.io.println'
-  ForbiddenPublicDataClass:
-    active: true
-    excludes: [ '**' ]
-    ignorePackages:
-      - '*.internal'
-      - '*.internal.*'
+      - reason: 'print does not allow you to configure the output stream. Use a logger instead.'
+        value: 'kotlin.io.print'
+      - reason: 'println does not allow you to configure the output stream. Use a logger instead.'
+        value: 'kotlin.io.println'
+  ForbiddenSuppress:
+    active: false
+    rules: [ ]
   ForbiddenVoid:
     active: true
     ignoreOverridden: false
@@ -543,13 +539,7 @@ style:
     active: true
     ignoreOverridableFunction: true
     ignoreActualFunction: true
-    excludedFunctions: ''
-  LibraryCodeMustSpecifyReturnType:
-    active: true
-    excludes: [ '**' ]
-  LibraryEntitiesShouldNotBePublic:
-    active: true
-    excludes: [ '**' ]
+    excludedFunctions: [ ]
   LoopWithTooManyJumpStatements:
     active: true
     maxJumpCount: 1
@@ -575,18 +565,25 @@ style:
     active: false
   MandatoryBracesLoops:
     active: false
+  MaxChainedCallsOnSameLine:
+    active: false
+    maxChainedCalls: 5
   MaxLineLength:
     active: true
     maxLineLength: 120
     excludePackageStatements: true
     excludeImportStatements: true
     excludeCommentStatements: false
+    excludeRawStrings: true
   MayBeConst:
     active: true
   ModifierOrder:
     active: true
   MultilineLambdaItParameter:
     active: false
+  MultilineRawStringIndentation:
+    active: false
+    indentSize: 4
   NestedClassesVisibility:
     active: true
   NewLineAtEndOfFile:
@@ -616,7 +613,8 @@ style:
   ReturnCount:
     active: true
     max: 2
-    excludedFunctions: 'equals'
+    excludedFunctions:
+      - 'equals'
     excludeLabeled: false
     excludeReturnFromLambda: true
     excludeGuardClauses: false
@@ -631,6 +629,8 @@ style:
     max: 2
     excludeGuardClauses: false
   TrailingWhitespace:
+    active: false
+  TrimMultilineRawString:
     active: false
   UnderscoresInNumericLiterals:
     active: false
@@ -654,6 +654,7 @@ style:
     active: false
   UnnecessaryParentheses:
     active: false
+    allowForUnclearPrecedence: false
   UntilInsteadOfRangeTo:
     active: false
   UnusedImports:
@@ -688,6 +689,8 @@ style:
     active: true
   UseRequireNotNull:
     active: true
+  UseSumOfInsteadOfFlatMapSize:
+    active: false
   UselessCallOnNotNull:
     active: true
   UtilityClassWithPublicConstructor:
@@ -697,177 +700,5 @@ style:
     ignoreLateinitVar: false
   WildcardImport:
     active: false
-    excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
     excludeImports:
       - 'java.util.*'
-
-formatting:
-  active: true
-  android: false
-  autoCorrect: true
-  AnnotationOnSeparateLine:
-    active: false
-    autoCorrect: true
-  AnnotationSpacing:
-    active: false
-    autoCorrect: true
-  ArgumentListWrapping:
-    active: false
-    autoCorrect: true
-    indentSize: 4
-    maxLineLength: 120
-  BlockCommentInitialStarAlignment:
-    active: false
-    autoCorrect: true
-  ChainWrapping:
-    active: true
-    autoCorrect: true
-  CommentSpacing:
-    active: true
-    autoCorrect: true
-  CommentWrapping:
-    active: false
-    autoCorrect: true
-    indentSize: 4
-  DiscouragedCommentLocation:
-    active: false
-    autoCorrect: true
-  EnumEntryNameCase:
-    active: false
-    autoCorrect: true
-  Filename:
-    active: true
-  FinalNewline:
-    active: true
-    autoCorrect: true
-    insertFinalNewLine: true
-  FunKeywordSpacing:
-    active: false
-    autoCorrect: true
-  FunctionTypeReferenceSpacing:
-    active: false
-    autoCorrect: true
-  ImportOrdering:
-    active: true
-    autoCorrect: true
-    layout: '*,java.**,javax.**,kotlin.**,^'
-  Indentation:
-    active: true
-    autoCorrect: true
-    indentSize: 4
-  KdocWrapping:
-    active: false
-    autoCorrect: true
-    indentSize: 4
-  MaximumLineLength:
-    active: true
-    maxLineLength: 120
-    ignoreBackTickedIdentifier: false
-  ModifierListSpacing:
-    active: false
-    autoCorrect: true
-  ModifierOrdering:
-    active: true
-    autoCorrect: true
-  MultiLineIfElse:
-    active: false
-    autoCorrect: true
-  NoBlankLineBeforeRbrace:
-    active: true
-    autoCorrect: true
-  NoConsecutiveBlankLines:
-    active: true
-    autoCorrect: true
-  NoEmptyClassBody:
-    active: true
-    autoCorrect: true
-  NoEmptyFirstLineInMethodBlock:
-    active: false
-    autoCorrect: true
-  NoLineBreakAfterElse:
-    active: true
-    autoCorrect: true
-  NoLineBreakBeforeAssignment:
-    active: true
-    autoCorrect: true
-  NoMultipleSpaces:
-    active: true
-    autoCorrect: true
-  NoSemicolons:
-    active: true
-    autoCorrect: true
-  NoTrailingSpaces:
-    active: true
-    autoCorrect: true
-  NoUnitReturn:
-    active: true
-    autoCorrect: true
-  NoUnusedImports:
-    active: true
-    autoCorrect: true
-  NoWildcardImports:
-    active: false
-    packagesToUseImportOnDemandProperty: 'java.util.*,kotlinx.android.synthetic.**'
-  PackageName:
-    active: false
-    autoCorrect: true
-  ParameterListWrapping:
-    active: true
-    autoCorrect: true
-    maxLineLength: 120
-  SpacingAroundAngleBrackets:
-    active: false
-    autoCorrect: true
-  SpacingAroundColon:
-    active: true
-    autoCorrect: true
-  SpacingAroundComma:
-    active: true
-    autoCorrect: true
-  SpacingAroundCurly:
-    active: true
-    autoCorrect: true
-  SpacingAroundDot:
-    active: true
-    autoCorrect: true
-  SpacingAroundDoubleColon:
-    active: false
-    autoCorrect: true
-  SpacingAroundKeyword:
-    active: true
-    autoCorrect: true
-  SpacingAroundOperators:
-    active: true
-    autoCorrect: true
-  SpacingAroundParens:
-    active: true
-    autoCorrect: true
-  SpacingAroundRangeOperator:
-    active: true
-    autoCorrect: true
-  SpacingAroundUnaryOperator:
-    active: false
-    autoCorrect: true
-  SpacingBetweenDeclarationsWithAnnotations:
-    active: false
-    autoCorrect: true
-  SpacingBetweenDeclarationsWithComments:
-    active: false
-    autoCorrect: true
-  StringTemplate:
-    active: true
-    autoCorrect: true
-  TrailingComma:
-    active: false
-    autoCorrect: true
-    allowTrailingComma: false
-    allowTrailingCommaOnCallSite: false
-  TypeArgumentListSpacing:
-    active: false
-    autoCorrect: true
-  UnnecessaryParenthesesBeforeTrailingLambda:
-    active: false
-    autoCorrect: true
-  Wrapping:
-    active: true
-    autoCorrect: true

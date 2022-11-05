@@ -1,11 +1,11 @@
 // From Slack by OliverO
-// See: https://kotlinlang.slack.com/archives/C01F2HV7868/p1660083429206369?thread_ts=1660083398.571449&cid=C01F2HV7868
+// See:
+// https://kotlinlang.slack.com/archives/C01F2HV7868/p1660083429206369?thread_ts=1660083398.571449&cid=C01F2HV7868
 
 @file:Suppress(
     "INVISIBLE_MEMBER",
     "INVISIBLE_REFERENCE",
-    "EXPOSED_PARAMETER_TYPE"
-) // WORKAROUND: ComposeWindow and ComposeLayer are internal
+    "EXPOSED_PARAMETER_TYPE") // WORKAROUND: ComposeWindow and ComposeLayer are internal
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.ComposeWindow
@@ -17,20 +17,18 @@ import org.w3c.dom.HTMLTitleElement
 
 private const val CANVAS_ELEMENT_ID = "ComposeTarget" // Hardwired into ComposeWindow
 
-/**
- * A Skiko/Canvas-based top-level window using the browser's entire viewport. Supports resizing.
- */
+/** A Skiko/Canvas-based top-level window using the browser's entire viewport. Supports resizing. */
 fun BrowserViewportWindow(
     title: String = "Untitled",
     content: @Composable ComposeWindow.() -> Unit
 ) {
-    val htmlHeadElement = document.head!!
-    htmlHeadElement.appendChild(
-        (document.createElement("style") as HTMLStyleElement).apply {
-            type = "text/css"
-            appendChild(
-                document.createTextNode(
-                    """
+  val htmlHeadElement = document.head!!
+  htmlHeadElement.appendChild(
+      (document.createElement("style") as HTMLStyleElement).apply {
+        type = "text/css"
+        appendChild(
+            document.createTextNode(
+                """
                     html, body {
                         overflow: hidden;
                         margin: 0 !important;
@@ -40,39 +38,36 @@ fun BrowserViewportWindow(
                     #$CANVAS_ELEMENT_ID {
                         outline: none;
                     }
-                    """.trimIndent()
-                )
-            )
-        }
-    )
+                    """
+                    .trimIndent()))
+      })
 
-    fun HTMLCanvasElement.fillViewportSize() {
-        setAttribute("width", "${window.innerWidth}")
-        setAttribute("height", "${window.innerHeight}")
-    }
+  fun HTMLCanvasElement.fillViewportSize() {
+    setAttribute("width", "${window.innerWidth}")
+    setAttribute("height", "${window.innerHeight}")
+  }
 
-    val canvas = (document.getElementById(CANVAS_ELEMENT_ID) as HTMLCanvasElement).apply {
-        fillViewportSize()
-    }
+  val canvas =
+      (document.getElementById(CANVAS_ELEMENT_ID) as HTMLCanvasElement).apply { fillViewportSize() }
 
-    ComposeWindow().apply {
-        window.addEventListener("resize", {
-            canvas.fillViewportSize()
-            layer.layer.attachTo(canvas)
-            val scale = layer.layer.contentScale
-            layer.setSize((canvas.width / scale).toInt(), (canvas.height / scale).toInt())
-            layer.layer.needRedraw()
+  ComposeWindow().apply {
+    window.addEventListener(
+        "resize",
+        {
+          canvas.fillViewportSize()
+          layer.layer.attachTo(canvas)
+          val scale = layer.layer.contentScale
+          layer.setSize((canvas.width / scale).toInt(), (canvas.height / scale).toInt())
+          layer.layer.needRedraw()
         })
 
-        // WORKAROUND: ComposeWindow does not implement `setTitle(title)`
-        val htmlTitleElement = (
-                htmlHeadElement.getElementsByTagName("title").item(0)
-                    ?: document.createElement("title").also { htmlHeadElement.appendChild(it) }
-                ) as HTMLTitleElement
-        htmlTitleElement.textContent = title
+    // WORKAROUND: ComposeWindow does not implement `setTitle(title)`
+    val htmlTitleElement =
+        (htmlHeadElement.getElementsByTagName("title").item(0)
+            ?: document.createElement("title").also { htmlHeadElement.appendChild(it) })
+            as HTMLTitleElement
+    htmlTitleElement.textContent = title
 
-        setContent {
-            content(this)
-        }
-    }
+    setContent { content(this) }
+  }
 }

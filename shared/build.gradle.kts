@@ -25,15 +25,21 @@ kotlin {
     }
     val commonTest by getting {
       dependencies {
-        api(kotlin("test"))
-        with(Deps.Test) { api(coroutines) }
+        implementation(kotlin("test"))
+        with(Deps.Test) {
+          implementation(koin)
+          implementation(coroutines)
+        }
       }
     }
     val jvmMain by getting { dependencies { api(Deps.Sqldelight.sqliteJvmDriver) } }
-    val jvmTest by getting
+    val jvmTest by getting {}
     val jsMain by getting { dependencies { api(Deps.Sqldelight.sqliteJsDriver) } }
     val jsTest by getting
-    val androidMain by getting { dependencies { api(Deps.Sqldelight.sqliteAndroidDriver) } }
+    val androidMain by getting {
+      dependencies { implementation(Deps.Sqldelight.sqliteAndroidDriver) }
+    }
+    val androidTest by getting { dependencies { implementation("junit:junit:4.13.2") } }
     val iosX64Main by getting
     val iosArm64Main by getting
     val iosSimulatorArm64Main by getting
@@ -69,12 +75,13 @@ sqldelight {
 android {
   compileSdk = 33
   defaultConfig {
-    minSdk = 24
+    minSdk = 26
     targetSdk = 33
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
   }
 
   sourceSets {
@@ -83,4 +90,5 @@ android {
       res.srcDirs("src/androidMain/res")
     }
   }
+  namespace = "org.chiachat.app.shared"
 }

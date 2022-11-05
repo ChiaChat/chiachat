@@ -1,4 +1,4 @@
-package com.example.compose
+package org.chiachat.app.compose.theme
 
 import androidx.compose.ui.graphics.Color
 

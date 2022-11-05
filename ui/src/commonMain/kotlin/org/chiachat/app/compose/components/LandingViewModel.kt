@@ -5,7 +5,6 @@ import co.touchlab.kermit.Logger
 import com.soywiz.korio.file.std.resourcesVfs
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import org.chiachat.app.ChiaChatDb
 import org.chiachat.app.compose.util.readImageBitmap
 import org.chiachat.app.db.DbService
 import org.chiachat.app.user.UserProfile

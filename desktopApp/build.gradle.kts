@@ -3,7 +3,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 plugins {
   kotlin("multiplatform")
   id("org.jetbrains.compose") version Versions.composeMultiplatform
-  id(Plugin.Id.conveyor) version Versions.conveyor
+  //  id(Plugin.Id.conveyor) version Versions.conveyor
 }
 
 repositories {
@@ -17,7 +17,7 @@ java { toolchain { languageVersion.set(JavaLanguageVersion.of(17)) } }
 
 kotlin {
   jvm {
-    compilations.all { kotlinOptions.jvmTarget = "11" }
+    compilations.all { kotlinOptions.jvmTarget = "17" }
     withJava()
   }
 
@@ -32,14 +32,14 @@ kotlin {
   }
 }
 
-dependencies {
+/*dependencies {
   // Use the configurations created by the Conveyor plugin to tell Gradle/Conveyor where to find the
   // artifacts for each platform.
   linuxAmd64(compose.desktop.linux_x64)
   macAmd64(compose.desktop.macos_x64)
   macAarch64(compose.desktop.macos_arm64)
   windowsAmd64(compose.desktop.windows_x64)
-}
+}*/
 
 val ico = File("../ui/src/commonMain/resources/icons/chiachat-trans-256x256.ico")
 val icns = File("../ui/src/commonMain/resources/icons/chiachat-trans-256x256.icns")
@@ -72,15 +72,15 @@ configurations.all {
   }
 }
 
-dependencies {
-  // Force override the Kotlin stdlib version used by Compose to 1.7 in the machine specific
-  // configurations, as otherwise we can end up
-  // with a mix of 1.6 and 1.7 on our classpath. This is the same logic as is applied to the regular
-  // Compose configurations normally.
-  val v = "1.7.10"
-  for (m in setOf("linuxAmd64", "macAmd64", "macAarch64", "windowsAmd64")) {
-    m("org.jetbrains.kotlin:kotlin-stdlib:$v")
-    m("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$v")
-    m("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$v")
-  }
-}
+/*dependencies {
+   // Force override the Kotlin stdlib version used by Compose to 1.7 in the machine specific
+   // configurations, as otherwise we can end up
+   // with a mix of 1.6 and 1.7 on our classpath. This is the same logic as is applied to the regular
+   // Compose configurations normally.
+   val v = "1.7.10"
+   for (m in setOf("linuxAmd64", "macAmd64", "macAarch64", "windowsAmd64")) {
+     m("org.jetbrains.kotlin:kotlin-stdlib:$v")
+     m("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$v")
+     m("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$v")
+   }
+ }*/

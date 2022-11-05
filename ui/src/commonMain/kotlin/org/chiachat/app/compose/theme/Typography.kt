@@ -1,8 +1,6 @@
 package org.chiachat.app.compose.theme
 
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import kotlinx.coroutines.flow.MutableStateFlow
 
 // Set of Material typography styles to start with
 
@@ -36,7 +34,7 @@ fun fontToWeight(name: String): FontWeight {
   return if (fonts.isEmpty()) FontFamily.Default else FontFamily(fonts)
 }*/
 
-private val defaultFontFamily = MutableStateFlow<FontFamily>(FontFamily.Default)
+// private val defaultFontFamily = MutableStateFlow<FontFamily>(FontFamily.Default)
 
 // @Composable
 // fun ChiaChatTypography(resources: ThemeResources): Typography {
