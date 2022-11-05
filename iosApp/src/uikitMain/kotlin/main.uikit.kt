@@ -9,7 +9,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Application
 import kotlinx.cinterop.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import org.chiachat.app.SharedAppModules
+import org.chiachat.app.compose.ComposeAppModule
 import org.chiachat.app.compose.ComposeRoot
+import org.koin.core.context.startKoin
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 import platform.Foundation.*
 import platform.UIKit.*
 
@@ -37,14 +44,21 @@ class SkikoAppDelegate : UIResponder, UIApplicationDelegateProtocol {
       application: UIApplication,
       didFinishLaunchingWithOptions: Map<Any?, *>?
   ): Boolean {
+    val platformModule = module {
+      factory(named("ioScope")) { CoroutineScope(Dispatchers.Default) }
+      factory(named("vmScope")) { CoroutineScope(Dispatchers.Default) }
+    }
+    startKoin {
+      modules(SharedAppModules.sharedModule, ComposeAppModule.composeModule, platformModule)
+      allowOverride(false)
+    }
     window = UIWindow(frame = UIScreen.mainScreen.bounds)
-    val app = ComposeRoot()
     val mainComponent = ComposeRoot()
     window!!.rootViewController =
         Application("chiachat") {
           Column {
             Spacer(modifier = Modifier.size(48.dp))
-            mainComponent.view()
+            mainComponent.View()
           }
         }
     window!!.makeKeyAndVisible()

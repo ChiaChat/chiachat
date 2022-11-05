@@ -17,8 +17,6 @@ class WebApp {
 
   val mainComponent = ComposeRoot()
 
-  val canvas = window.document.getElementById("ComposeTarget") as HTMLCanvasElement
-  val ctx = canvas.getContext("webgl") as WebGLRenderingContext
 
   val platformModule = module {
     factory(named("ioScope")) { CoroutineScope(Dispatchers.Default) }
@@ -30,16 +28,7 @@ class WebApp {
       modules(SharedAppModules.sharedModule, ComposeAppModule.composeModule, platformModule)
       allowOverride(false)
     }
-    resizeCanvas()
-    window.onresize = { resizeCanvas() }
   }
-
-  fun resizeCanvas() {
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-    ctx.viewport(0, 0, window.innerWidth, window.innerHeight)
-  }
-
   @Composable
   fun View() {
     mainComponent.View()
