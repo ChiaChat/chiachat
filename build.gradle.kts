@@ -77,7 +77,6 @@ allprojects {
 }
 
 subprojects {
-  apply(plugin = Plugin.Id.kover)
   apply(plugin = Plugin.Id.detekt)
 
   detekt {
@@ -120,7 +119,7 @@ subprojects {
 }
 
 val rootPackage = "org.chiachat.app"
-val basePackage = listOf("*", "").map { "$rootPackage.it" }
+val basePackage = listOf("*", "").map { "$rootPackage.$it" }
 val excludedPackages =
     listOf("type", "selections", "adapter", "apollo", "test", "android.test", "compose", "").map {
       "$rootPackage.$it.*"
@@ -134,6 +133,9 @@ koverMerged {
     classes {
       includes += basePackage
       excludes += excludedPackages
+    }
+    projects {
+      excludes += listOf(":androidApp", ":desktopApp", "iosApp", "webApp")
     }
   }
 

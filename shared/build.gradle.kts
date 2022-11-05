@@ -2,6 +2,7 @@ plugins {
   kotlin("multiplatform")
   id("app.cash.sqldelight") version "2.0.0-alpha04"
   id("com.android.library")
+  id(Plugin.Id.kover)
 }
 
 version = "1.0"

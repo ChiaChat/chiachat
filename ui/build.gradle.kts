@@ -2,6 +2,7 @@ plugins {
   kotlin("multiplatform")
   id("org.jetbrains.compose") version Versions.composeMultiplatform
   id("com.android.library")
+  id(Plugin.Id.kover)
 }
 
 version = "1.0"
