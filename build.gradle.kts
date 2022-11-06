@@ -123,7 +123,7 @@ val basePackage = listOf("*", "").map { "$rootPackage.$it" }
 val excludedPackages =
     listOf("type", "selections", "adapter", "apollo", "test", "android.test", "compose", "").map {
       "$rootPackage.$it.*"
-    } + "*.BuildConfig" + "*.MainActivity" + "*.**Test"
+    } + "*.BuildConfig" + "*.MainActivity" + "*.**Test" + "*.**Module**" + "*.**ChiaChatDbImpl"
 
 koverMerged {
   enable() // create Kover merged report tasks from this project and subprojects with enabled Kover
@@ -135,7 +135,7 @@ koverMerged {
       excludes += excludedPackages
     }
     projects {
-      excludes += listOf(":androidApp", ":desktopApp", "iosApp", "webApp")
+      excludes += listOf(":androidApp", ":desktopApp", ":iosApp", ":webApp")
     }
   }
 

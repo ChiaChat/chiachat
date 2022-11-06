@@ -6,13 +6,13 @@ data class Toast(
     val type: ToastType,
     val message: String,
 ) {
-  fun log() {
+  fun log(logger: Logger) {
     when (type) {
-      ToastType.ERROR -> Logger.e(message)
-      ToastType.WARNING -> Logger.w(message)
-      ToastType.INFO -> Logger.i(message)
-      ToastType.SUCCESS -> Logger.i(message)
-      ToastType.DEBUG -> Logger.d(message)
+      ToastType.ERROR -> logger.e(message)
+      ToastType.WARNING -> logger.w(message)
+      ToastType.INFO -> logger.i(message)
+      ToastType.SUCCESS -> logger.i(message)
+      ToastType.DEBUG -> logger.d(message)
     }
   }
 }
