@@ -22,6 +22,10 @@ kotlin {
         api(Deps.Kotlinx.coroutines)
         api(Deps.Koin.core)
         api(Deps.Kor.korio)
+        with(Deps.Utility) {
+          api(mpsettings)
+          api(mpsettingsNoArgs)
+        }
       }
     }
     val commonTest by getting {
@@ -33,9 +37,9 @@ kotlin {
         }
       }
     }
-    val jvmMain by getting { dependencies { api(Deps.Sqldelight.sqliteJvmDriver) } }
+    val jvmMain by getting { dependencies { implementation(Deps.Sqldelight.sqliteJvmDriver) } }
     val jvmTest by getting {}
-    val jsMain by getting { dependencies { api(Deps.Sqldelight.sqliteJsDriver) } }
+    val jsMain by getting { dependencies { implementation(Deps.Sqldelight.sqliteJsDriver) } }
     val jsTest by getting
     val androidMain by getting {
       dependencies { implementation(Deps.Sqldelight.sqliteAndroidDriver) }
@@ -50,7 +54,7 @@ kotlin {
       iosArm64Main.dependsOn(this)
       iosSimulatorArm64Main.dependsOn(this)
 
-      dependencies { api(Deps.Sqldelight.sqliteNativeDriver) }
+      dependencies { implementation(Deps.Sqldelight.sqliteNativeDriver) }
     }
     val iosX64Test by getting
     val iosArm64Test by getting

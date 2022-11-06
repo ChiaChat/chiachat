@@ -28,7 +28,7 @@ kotlin {
     val commonTest by getting { dependencies { implementation(project(":shared")) } }
     val jvmMain by getting {
       dependsOn(commonMain)
-      dependencies { implementation(compose.preview) }
+      dependencies { api(compose.preview) }
     }
     val jvmTest by getting { dependencies { api(project(":shared")) } }
     val jsMain by getting { dependsOn(commonMain) }
@@ -38,6 +38,7 @@ kotlin {
         implementation("androidx.appcompat:appcompat:1.5.1")
         implementation("androidx.core:core-ktx:1.9.0")
         implementation("androidx.compose.ui:ui-graphics:1.4.0-alpha01")
+        dependencies { api(compose.preview) }
       }
     }
     val androidTest by getting

@@ -8,7 +8,11 @@ import kotlinx.coroutines.launch
 
 const val TOAST_TIMER_MS = 5000L
 
-class ToastService(val ioScope: CoroutineScope, val toastTimer: Long = TOAST_TIMER_MS, val logger: Logger? = null) {
+class ToastService(
+    val ioScope: CoroutineScope,
+    val toastTimer: Long = TOAST_TIMER_MS,
+    val logger: Logger? = null
+) {
 
   val currentToast = MutableStateFlow<Toast?>(null)
 

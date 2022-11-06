@@ -23,10 +23,10 @@ object Versions {
   const val composeMultiplatform = "1.2.1-rc03"
   const val nativeCoroutines = "0.12.5"
   const val kor = "3.3.0"
-  const val okio = "3.2.0"
   const val ktfmtGradle = "0.11.0"
   const val conveyor = "1.2"
   const val kotlinxSerialization = "1.4.1"
+  const val mpsettings = "1.0.0-RC"
 }
 
 object Plugin {
@@ -83,8 +83,6 @@ object Deps {
     const val korio = "com.soywiz.korlibs.korio:korio:${Versions.kor}"
   }
 
-  const val okio = "com.squareup.okio:okio:${Versions.okio}"
-
   object Kotlinx {
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     const val protobuf =
@@ -125,6 +123,12 @@ object Deps {
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     const val koin = "io.insert-koin:koin-test:${Versions.koin}"
     const val koinJvm = "io.insert-koin:koin-test-junit5:${Versions.koin}"
+  }
+
+  object Utility {
+    const val mpsettings = "com.russhwolf:multiplatform-settings:${Versions.mpsettings}"
+    const val mpsettingsNoArgs =
+        "com.russhwolf:multiplatform-settings-no-arg:${Versions.mpsettings}"
   }
 
   object Sqldelight {

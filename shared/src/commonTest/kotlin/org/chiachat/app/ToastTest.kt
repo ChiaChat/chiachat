@@ -1,12 +1,11 @@
 package org.chiachat.app
 
-import co.touchlab.kermit.Logger
-import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runTest
 import org.chiachat.app.toast.ToastService
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class ToastTest {
 

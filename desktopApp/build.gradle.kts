@@ -48,14 +48,24 @@ val png = File("../ui/src/commonMain/resources/icons/chiachat-trans-256x256.png"
 compose.desktop {
   application {
     mainClass = "org.chiachat.app.desktop.MainKt"
-    //    buildTypes.release.proguard { configurationFiles.from(project.file("compose-desktop.pro"))
-    // }
+
+    buildTypes.release.proguard {
+      this.isEnabled.set(true)
+      configurationFiles.from(project.file("compose-desktop.pro"))
+    }
+
     nativeDistributions {
       targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
       packageName = "ChiaChat"
       packageVersion = "1.0.0"
+
+      modules("java.sql")
+
       macOS { iconFile.set(icns) }
-      windows { iconFile.set(ico) }
+      windows {
+        iconFile.set(ico)
+        console = true
+      }
       linux {
         iconFile.set(png)
         packageName = "chia-chat"
