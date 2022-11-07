@@ -1,28 +1,58 @@
 package org.chiachat.app.compose.components
 
-import androidx.compose.ui.graphics.ImageBitmap
-import co.touchlab.kermit.Logger
 import com.soywiz.korio.file.std.resourcesVfs
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import org.chiachat.app.compose.composables.ProfileCardItem
 import org.chiachat.app.compose.util.readImageBitmap
 import org.chiachat.app.db.DbService
 import org.chiachat.app.user.UserProfile
-import org.koin.core.component.inject
 
-val demoUser =
-    UserProfile("Andrea Bueide", "0x1234567890123456", resourcesVfs["previews/dazaipfp.png"])
+val defaultPath = "previews/dazaipfp.png"
 
-class LandingViewModel : ViewModel() {
-  val dbService: DbService by inject()
-  val image: MutableStateFlow<ImageBitmap?> = MutableStateFlow(null)
-  val dbVersion = MutableStateFlow<Int?>(null)
+interface ILandingViewModel: IViewModel {
+  val dbVersion: MutableStateFlow<Int?>
+  val users: MutableStateFlow<List<ProfileCardItem>>
+  val textField: MutableStateFlow<String>
+
+  fun addProfile(){
+    ioScope.launch {
+      val image = resourcesVfs[defaultPath]
+      val name = textField.value
+      users.value += ProfileCardItem(name, image.readImageBitmap())
+      insertProfile(UserProfile(name, image))
+    }
+  }
+  fun setDbVersion()
+  fun refreshProfiles()
+  fun insertProfile(profile: UserProfile)
+}
+class LandingViewModel(val dbService: DbService) : ViewModel(), ILandingViewModel {
+  override val dbVersion = MutableStateFlow<Int?>(null)
+  override val users = MutableStateFlow(emptyList<ProfileCardItem>())
+  override val textField = MutableStateFlow("")
 
   init {
     ioScope.launch {
-      resourcesVfs["."].listRecursive().collect { Logger.i(it.path) }
-      image.value = demoUser.profileImage.readImageBitmap()
-      dbVersion.value = dbService.db.versionTableQueries.getVersion().executeAsOneOrNull()?.toInt()
+      setDbVersion()
+      refreshProfiles()
     }
+  }
+
+  override fun setDbVersion() {
+    dbVersion.value = dbService.getVersion()
+  }
+
+  override fun refreshProfiles() {
+    dbService.db.profileTableQueries.getProfiles().executeAsList().forEach { user ->
+      ioScope.launch {
+        val image = resourcesVfs[user.profile_image ?: defaultPath].readImageBitmap()
+        users.value += ProfileCardItem(user.name, image)
+      }
+    }
+  }
+
+  override fun insertProfile(profile: UserProfile) {
+    dbService.db.profileTableQueries.addProfile(profile.username, profile.profileImage.path)
   }
 }

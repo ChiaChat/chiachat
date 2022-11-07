@@ -66,6 +66,6 @@ class NavigationService(initialScreen: Component, val maxScreens: Int = 10) {
 
   @Composable
   fun currentView() {
-    currentScreen.value?.view()
+    currentScreen.value?.View()
   }
 }

@@ -16,7 +16,6 @@ class DesktopApp(driver: SqlDriver) {
   val desktopModule = module {
     single { driver }
     factory(named("ioScope")) { CoroutineScope(Dispatchers.IO) }
-
     factory(named("vmScope")) { CoroutineScope(Dispatchers.Default) }
   }
 

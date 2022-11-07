@@ -25,7 +25,15 @@ kotlin {
         api(compose.runtime)
       }
     }
-    val commonTest by getting { dependencies { implementation(project(":shared")) } }
+    val commonTest by getting {
+      dependencies {
+        implementation(kotlin("test"))
+        with(Deps.Test) {
+          implementation(koin)
+          implementation(coroutines)
+        }
+      }
+    }
     val jvmMain by getting {
       dependsOn(commonMain)
       dependencies { api(compose.preview) }

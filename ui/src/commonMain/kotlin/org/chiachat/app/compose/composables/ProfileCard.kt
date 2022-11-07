@@ -13,11 +13,10 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import org.chiachat.app.user.UserProfile
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileCard(profile: UserProfile, image: ImageBitmap?) {
+fun ProfileCard(item: ProfileCardItem) {
   Card(
       shape = RoundedCornerShape(8.dp),
       colors =
@@ -32,18 +31,21 @@ fun ProfileCard(profile: UserProfile, image: ImageBitmap?) {
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.fillMaxWidth()) {
-          if (image != null) {
-            //            val image = makeFromEncoded(imageData).toComposeImageBitmap()
+          if (item.image != null) {
             Image(
-                painter = BitmapPainter(image),
+                painter = BitmapPainter(item.image),
                 contentDescription = "Sample",
                 modifier = Modifier.size(36.dp),
                 contentScale = ContentScale.Fit)
+          }else {
+              Text("Loading Image")
           }
-          Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Text(profile.username)
-            Text(profile.fingerprint)
-          }
+          Column(verticalArrangement = Arrangement.spacedBy(10.dp)) { Text(item.name) }
         }
   }
 }
+
+data class ProfileCardItem(
+    val name: String,
+    val image: ImageBitmap?
+)

@@ -1,4 +1,7 @@
 setVersion:
+INSERT INTO VersionTable(version) VALUES (?);
+
+updateVersion:
 UPDATE VersionTable SET version = ?;
 
 getVersion:

@@ -1,0 +1,5 @@
+CREATE TABLE USER_PROFILE(
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    profile_image TEXT
+);
