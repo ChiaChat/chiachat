@@ -9,7 +9,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-object ComposeAppModule {
+object ComposeAppModules {
   val composeModule = module {
     singleOf(::LandingViewModel)
     singleOf(::LandingComponent)
