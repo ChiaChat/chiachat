@@ -1,4 +1,4 @@
-package org.chiachat.app
+package org.chiachat.app.toast
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceTimeBy

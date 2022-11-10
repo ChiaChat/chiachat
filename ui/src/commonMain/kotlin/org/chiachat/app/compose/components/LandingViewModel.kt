@@ -8,7 +8,7 @@ import org.chiachat.app.compose.util.readImageBitmap
 import org.chiachat.app.db.DbService
 import org.chiachat.app.user.UserProfile
 
-val defaultPath = "previews/dazaipfp.png"
+const val defaultPath = "previews/dazaipfp.png"
 
 interface ILandingViewModel: IViewModel {
   val dbVersion: MutableStateFlow<Int?>

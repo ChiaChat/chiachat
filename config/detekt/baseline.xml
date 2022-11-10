@@ -1,6 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <SmellBaseline>
-    <ManuallySuppressedIssues/>
-    <CurrentIssues>
-    </CurrentIssues>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>SwallowedException:DbService.kt$DbService$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:DbService.kt$DbService$e: Exception</ID>
+    <ID>TopLevelPropertyNaming:LandingViewModel.kt$const val defaultPath = "previews/dazaipfp.png"</ID>
+  </CurrentIssues>
 </SmellBaseline>

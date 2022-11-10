@@ -3,11 +3,6 @@ package org.chiachat.app.db
 import app.cash.sqldelight.db.SqlDriver
 import co.touchlab.kermit.Logger
 import org.chiachat.app.ChiaChatDb
-import org.chiachat.app.util.Platform
-import org.chiachat.app.util.getPlatform
-
-const val SQLITE_EXCEPTION_NAME = "SQLiteException"
-const val VERSION_TABLE_EXISTS = "table VersionTable already exists"
 
 class DbService(val driver: SqlDriver) {
 
@@ -22,13 +17,12 @@ class DbService(val driver: SqlDriver) {
     return try {
       db.versionTableQueries.getVersion().executeAsOneOrNull()?.toInt()
     } catch (e: Exception) {
-      Logger.e { e.stackTraceToString() }
       1
     }
   }
 
   fun setVersion(version: Int): Boolean {
-    return try {
+    val setVersionSucceeded = try {
       val tableVersion = db.versionTableQueries.getVersion().executeAsOneOrNull()
       if (tableVersion == null) {
         db.versionTableQueries.setVersion(version.toLong())
@@ -36,10 +30,13 @@ class DbService(val driver: SqlDriver) {
         db.versionTableQueries.updateVersion(version.toLong())
       }
       true
-    } catch (e: Exception) {
+    } catch (
+      e: Exception
+    ) {
       Logger.e { e.stackTraceToString() }
       false
     }
+    return setVersionSucceeded
   }
 
   @Suppress("TooGenericExceptionCaught")
