@@ -2,8 +2,6 @@ package org.chiachat.app.db
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.chiachat.app.db.DbService
-import org.chiachat.app.db.PlatformDb
 import org.chiachat.app.util.Platform
 import org.chiachat.app.util.getPlatform
 import kotlin.test.Test
