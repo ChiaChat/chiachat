@@ -2,4 +2,4 @@ CREATE TABLE VersionTable(
     version INTEGER PRIMARY KEY
 );
 
-INSERT INTO VersionTable(version) VALUES (1);
+INSERT INTO VersionTable(version) VALUES (2);

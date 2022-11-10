@@ -25,7 +25,15 @@ kotlin {
         api(compose.runtime)
       }
     }
-    val commonTest by getting { dependencies { implementation(project(":shared")) } }
+    val commonTest by getting {
+      dependencies {
+        implementation(kotlin("test"))
+        with(Deps.Test) {
+          implementation(koin)
+          implementation(coroutines)
+        }
+      }
+    }
     val jvmMain by getting {
       dependsOn(commonMain)
       dependencies { api(compose.preview) }
@@ -73,8 +81,8 @@ android {
   }
 
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
   }
 
   sourceSets {

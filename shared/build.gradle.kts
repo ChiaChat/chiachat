@@ -3,6 +3,7 @@ plugins {
   id("app.cash.sqldelight") version "2.0.0-alpha04"
   id("com.android.library")
   id(Plugin.Id.kover)
+//  id("com.google.devtools.ksp") version "1.7.20-1.0.8"
 }
 
 version = "1.0"
@@ -31,6 +32,7 @@ kotlin {
     val commonTest by getting {
       dependencies {
         implementation(kotlin("test"))
+//        implementation("io.mockative:mockative:1.2.3")
         with(Deps.Test) {
           implementation(koin)
           implementation(coroutines)
@@ -68,6 +70,14 @@ kotlin {
   }
 }
 
+/*dependencies {
+  configurations
+    .filter { it.name.startsWith("ksp") && it.name.contains("Test") }
+    .forEach {
+      add(it.name, "io.mockative:mockative-processor:1.2.3")
+    }
+}*/
+
 sqldelight {
   database("ChiaChatDb") { // This will be the name of the generated database class.
     packageName = "org.chiachat.app"
@@ -85,8 +95,8 @@ android {
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
   }
 
   sourceSets {

@@ -1,0 +1,8 @@
+addProfile:
+INSERT INTO USER_PROFILE(name, profile_image) VALUES (?, ?);
+
+getProfiles:
+SELECT * FROM USER_PROFILE;
+
+getProfile:
+SELECT * FROM USER_PROFILE WHERE id = ?;

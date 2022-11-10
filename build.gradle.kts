@@ -119,9 +119,9 @@ subprojects {
 }
 
 val rootPackage = "org.chiachat.app"
-val basePackage = listOf("*", "").map { "$rootPackage.$it" }
+val basePackage = listOf("*", "compose").map { "$rootPackage.$it" }
 val excludedPackages =
-    listOf("type", "selections", "adapter", "apollo", "test", "android.test", "compose", "").map {
+    listOf("type", "selections", "adapter", "apollo", "test", "android.test", "compose").map {
       "$rootPackage.$it.*"
     } + "*.BuildConfig" + "*.MainActivity" + "*.**Test" + "*.**Module**" + "*.ChiaChatDbImpl*"
 
@@ -134,7 +134,9 @@ koverMerged {
       includes += basePackage
       excludes += excludedPackages
     }
-    projects { excludes += listOf(":androidApp", ":desktopApp", ":iosApp", ":webApp") }
+    projects {
+      excludes += listOf(":androidApp", ":desktopApp", ":iosApp", ":webApp")
+    }
   }
 
   xmlReport {

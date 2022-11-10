@@ -18,6 +18,9 @@ kotlin {
       dependencies {
         implementation(project(":ui"))
         implementation(compose.web.core)
+        implementation(kotlin("stdlib-js"))
+        implementation(devNpm("copy-webpack-plugin", "11.0.0"))
+        implementation(npm("sql.js", "1.6.2"))
       }
       this.resources.setSrcDirs(
           listOf(
