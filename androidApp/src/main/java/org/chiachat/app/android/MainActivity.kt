@@ -1,38 +1,39 @@
 package org.chiachat.app.android
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.addCallback
 import androidx.activity.compose.setContent
-import com.soywiz.korio.android.AndroidCoroutineContext
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import org.chiachat.app.SharedAppModules
-import org.chiachat.app.compose.ComposeAppModule
+import org.chiachat.app.compose.ComposeAppModules
 import org.chiachat.app.compose.ComposeRoot
 import org.chiachat.app.compose.services.NavigationService
+import org.chiachat.app.db.PlatformDb
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
-import org.koin.core.qualifier.named
-import org.koin.dsl.module
+import org.koin.core.context.stopKoin
 
 class MainActivity : ComponentActivity(), KoinComponent {
-  val ioContext = Dispatchers.IO + AndroidCoroutineContext(this)
-  val vmContext = Dispatchers.Default + AndroidCoroutineContext(this)
+  val context: Context = this
 
-  val androidModule = module {
-    factory(named("ioScope")) { CoroutineScope(ioContext) }
-    factory(named("vmScope")) { CoroutineScope(vmContext) }
-  }
   val app = ComposeRoot()
 
-  val navigationService: NavigationService by inject()
-
   init {
-    startKoin {
-      modules(SharedAppModules.sharedModule, ComposeAppModule.composeModule, androidModule)
-      allowOverride(false)
+    runBlocking {
+      val androidModules = AndroidModules(context)
+      startKoin { modules(androidModules.all) }
+      val driver = PlatformDb().getDriver()
+      val sharedModules = SharedAppModules(driver)
+      val composeModules = ComposeAppModules()
+      stopKoin()
+
+      startKoin {
+        modules(androidModules.all + composeModules.all + sharedModules.all)
+        allowOverride(false)
+      }
     }
   }
 
@@ -41,6 +42,7 @@ class MainActivity : ComponentActivity(), KoinComponent {
     super.onCreate(savedInstanceState)
     setContent { app.View() }
 
+    val navigationService: NavigationService by inject()
     val callback = onBackPressedDispatcher.addCallback(this) { navigationService.back() }
 
     callback.isEnabled = true

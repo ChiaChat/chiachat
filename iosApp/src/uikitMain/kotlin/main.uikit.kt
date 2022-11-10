@@ -12,7 +12,7 @@ import kotlinx.cinterop.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.chiachat.app.SharedAppModules
-import org.chiachat.app.compose.ComposeAppModule
+import org.chiachat.app.compose.ComposeAppModules
 import org.chiachat.app.compose.ComposeRoot
 import org.koin.core.context.startKoin
 import org.koin.core.qualifier.named
@@ -49,7 +49,7 @@ class SkikoAppDelegate : UIResponder, UIApplicationDelegateProtocol {
       factory(named("vmScope")) { CoroutineScope(Dispatchers.Default) }
     }
     startKoin {
-      modules(SharedAppModules.sharedModule, ComposeAppModule.composeModule, platformModule)
+      modules(SharedAppModules.sharedModule, ComposeAppModules.composeModule, platformModule)
       allowOverride(false)
     }
     window = UIWindow(frame = UIScreen.mainScreen.bounds)
