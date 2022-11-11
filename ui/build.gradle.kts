@@ -1,7 +1,7 @@
 plugins {
   kotlin("multiplatform")
   id("org.jetbrains.compose") version Versions.composeMultiplatform
-  id("com.android.library")
+//  id("com.android.library")
   id(Plugin.Id.kover)
 }
 
@@ -10,7 +10,7 @@ version = "1.0"
 kotlin {
   jvm()
   js(IR) { browser { commonWebpackConfig { cssSupport.enabled = true } } }
-  android()
+//  android()
   iosArm64()
   iosX64()
   iosSimulatorArm64()
@@ -41,15 +41,15 @@ kotlin {
     val jvmTest by getting { dependencies { api(project(":shared")) } }
     val jsMain by getting { dependsOn(commonMain) }
     val jsTest by getting
-    val androidMain by getting {
-      dependencies {
-        implementation("androidx.appcompat:appcompat:1.5.1")
-        implementation("androidx.core:core-ktx:1.9.0")
-        implementation("androidx.compose.ui:ui-graphics:1.4.0-alpha01")
-        dependencies { api(compose.preview) }
-      }
-    }
-    val androidTest by getting
+//    val androidMain by getting {
+//      dependencies {
+//        implementation("androidx.appcompat:appcompat:1.5.1")
+//        implementation("androidx.core:core-ktx:1.9.0")
+//        implementation("androidx.compose.ui:ui-graphics:1.4.0-alpha01")
+//        dependencies { api(compose.preview) }
+//      }
+//    }
+//    val androidTest by getting
     val iosX64Main by getting
     val iosArm64Main by getting
     val iosSimulatorArm64Main by getting
@@ -71,6 +71,7 @@ kotlin {
   }
 }
 
+/*
 android {
   compileSdk = 33
 
@@ -94,3 +95,4 @@ android {
   }
   namespace = "org.chiachat.app.ui"
 }
+*/

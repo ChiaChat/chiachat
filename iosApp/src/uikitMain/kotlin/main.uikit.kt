@@ -9,14 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Application
 import kotlinx.cinterop.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import org.chiachat.app.SharedAppModules
 import org.chiachat.app.compose.ComposeAppModules
 import org.chiachat.app.compose.ComposeRoot
+import org.chiachat.app.db.PlatformDb
 import org.koin.core.context.startKoin
-import org.koin.core.qualifier.named
-import org.koin.dsl.module
 import platform.Foundation.*
 import platform.UIKit.*
 
@@ -44,13 +42,15 @@ class SkikoAppDelegate : UIResponder, UIApplicationDelegateProtocol {
       application: UIApplication,
       didFinishLaunchingWithOptions: Map<Any?, *>?
   ): Boolean {
-    val platformModule = module {
-      factory(named("ioScope")) { CoroutineScope(Dispatchers.Default) }
-      factory(named("vmScope")) { CoroutineScope(Dispatchers.Default) }
-    }
-    startKoin {
-      modules(SharedAppModules.sharedModule, ComposeAppModules.composeModule, platformModule)
-      allowOverride(false)
+    runBlocking {
+      val iosModules = IosAppModules()
+      val composeModules = ComposeAppModules()
+      val sharedModules = SharedAppModules(PlatformDb().getDriver())
+
+      startKoin {
+        modules(iosModules.all + composeModules.all + sharedModules.all)
+        allowOverride(false)
+      }
     }
     window = UIWindow(frame = UIScreen.mainScreen.bounds)
     val mainComponent = ComposeRoot()
