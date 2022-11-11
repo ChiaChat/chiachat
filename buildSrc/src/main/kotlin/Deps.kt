@@ -27,6 +27,7 @@ object Versions {
   const val conveyor = "1.2"
   const val kotlinxSerialization = "1.4.1"
   const val mpsettings = "1.0.0-RC"
+  const val trixnity = "3.0.0-beta3"
 }
 
 object Plugin {
@@ -140,5 +141,9 @@ object Deps {
     const val sqliteJvmDriver = "app.cash.sqldelight:sqlite-driver:${Versions.sqlDelight}"
     const val sqliteNativeDriver = "app.cash.sqldelight:native-driver:${Versions.sqlDelight}"
     const val sqliteAndroidDriver = "app.cash.sqldelight:android-driver:${Versions.sqlDelight}"
+  }
+
+  object Matrix {
+    val Client = "net.folivo:trixnity-client:${Versions.trixnity}"
   }
 }
