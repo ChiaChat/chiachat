@@ -16,6 +16,6 @@ class LoginViewModel: ViewModel(), ILoginViewModel  {
     override val password: MutableStateFlow<String> = MutableStateFlow("")
 
     override fun onLogin() {
-
     }
+
 }
