@@ -39,7 +39,11 @@ fun CchActionButton(text: String, onClick: () -> Unit, modifier: Modifier = Modi
 }
 
 @Composable
-fun ToggleDarkModeButton(themeService: ThemeService, resourceService: ResourceService, modifier: Modifier = Modifier) {
+fun ToggleDarkModeButton(
+    themeService: ThemeService,
+    resourceService: ResourceService,
+    modifier: Modifier = Modifier
+) {
   var darkIcon by mutableStateOf<ImageBitmap?>(null)
   var lightIcon by mutableStateOf<ImageBitmap?>(null)
   val isDarkMode by themeService.darkMode.collectAsState()

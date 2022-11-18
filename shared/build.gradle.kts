@@ -1,9 +1,9 @@
 plugins {
   kotlin("multiplatform")
   id("app.cash.sqldelight") version "2.0.0-alpha04"
-//  id("com.android.library")
+  //  id("com.android.library")
   id(Plugin.Id.kover)
-//  id("com.google.devtools.ksp") version "1.7.20-1.0.8"
+  //  id("com.google.devtools.ksp") version "1.7.20-1.0.8"
 }
 
 version = "1.0"
@@ -11,7 +11,7 @@ version = "1.0"
 kotlin {
   jvm()
   js(IR) { browser {} }
- // android()
+  // android()
   iosArm64()
   iosX64()
   iosSimulatorArm64()
@@ -33,7 +33,7 @@ kotlin {
     val commonTest by getting {
       dependencies {
         implementation(kotlin("test"))
-//        implementation("io.mockative:mockative:1.2.3")
+        //        implementation("io.mockative:mockative:1.2.3")
         with(Deps.Test) {
           implementation(koin)
           implementation(coroutines)
@@ -44,10 +44,10 @@ kotlin {
     val jvmTest by getting {}
     val jsMain by getting { dependencies { implementation(Deps.Sqldelight.sqliteJsDriver) } }
     val jsTest by getting
-//    val androidMain by getting {
-//      dependencies { implementation(Deps.Sqldelight.sqliteAndroidDriver) }
-//    }
-//    val androidTest by getting { dependencies { implementation("junit:junit:4.13.2") } }
+    //    val androidMain by getting {
+    //      dependencies { implementation(Deps.Sqldelight.sqliteAndroidDriver) }
+    //    }
+    //    val androidTest by getting { dependencies { implementation("junit:junit:4.13.2") } }
     val iosX64Main by getting
     val iosArm64Main by getting
     val iosSimulatorArm64Main by getting
@@ -89,22 +89,22 @@ sqldelight {
 }
 
 /*android {
-  compileSdk = 33
-  defaultConfig {
-    minSdk = 26
-    targetSdk = 33
-    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-  }
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-  }
+   compileSdk = 33
+   defaultConfig {
+     minSdk = 26
+     targetSdk = 33
+     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+   }
+   compileOptions {
+     sourceCompatibility = JavaVersion.VERSION_17
+     targetCompatibility = JavaVersion.VERSION_17
+   }
 
-  sourceSets {
-    named("main") {
-      manifest.srcFile("src/androidMain/AndroidManifest.xml")
-      res.srcDirs("src/androidMain/res")
-    }
-  }
-  namespace = "org.chiachat.app.shared"
-}*/
+   sourceSets {
+     named("main") {
+       manifest.srcFile("src/androidMain/AndroidManifest.xml")
+       res.srcDirs("src/androidMain/res")
+     }
+   }
+   namespace = "org.chiachat.app.shared"
+ }*/

@@ -25,18 +25,16 @@ class LoginViewModel : ViewModel(), ILoginViewModel {
   override val themeService: ThemeService by inject()
   override val resourceService: ResourceService by inject()
 
-
   override val server: MutableStateFlow<String> = MutableStateFlow("matrix.natnat.xyz")
   override val username: MutableStateFlow<String> = MutableStateFlow("andrea")
   override val password: MutableStateFlow<String> = MutableStateFlow("")
-
 
   override val darkModeIcon: MutableStateFlow<ImageBitmap?> = MutableStateFlow(null)
   override val lightModeIcon: MutableStateFlow<ImageBitmap?> = MutableStateFlow(null)
 
   init {
-    resourceService.loadIcon(CchIcons.DARK_MODE){ darkModeIcon.value = it }
-    resourceService.loadIcon(CchIcons.LIGHT_MODE){ lightModeIcon.value = it }
+    resourceService.loadIcon(CchIcons.DARK_MODE) { darkModeIcon.value = it }
+    resourceService.loadIcon(CchIcons.LIGHT_MODE) { lightModeIcon.value = it }
   }
 
   override fun onLogin() {}

@@ -1,6 +1,5 @@
 package org.chiachat.app.desktop
 
-import app.cash.sqldelight.db.SqlDriver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.qualifier.named

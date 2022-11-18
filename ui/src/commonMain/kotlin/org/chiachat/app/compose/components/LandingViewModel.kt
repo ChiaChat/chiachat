@@ -10,12 +10,12 @@ import org.chiachat.app.user.UserProfile
 
 const val defaultPath = "previews/dazaipfp.png"
 
-interface ILandingViewModel: IViewModel {
+interface ILandingViewModel : IViewModel {
   val dbVersion: MutableStateFlow<Int?>
   val users: MutableStateFlow<List<ProfileCardItem>>
   val textField: MutableStateFlow<String>
 
-  fun addProfile(){
+  fun addProfile() {
     ioScope.launch {
       val image = resourcesVfs[defaultPath]
       val name = textField.value
@@ -27,6 +27,7 @@ interface ILandingViewModel: IViewModel {
   fun refreshProfiles()
   fun insertProfile(profile: UserProfile)
 }
+
 class LandingViewModel(val dbService: DbService) : ViewModel(), ILandingViewModel {
   override val dbVersion = MutableStateFlow<Int?>(null)
   override val users = MutableStateFlow(emptyList<ProfileCardItem>())

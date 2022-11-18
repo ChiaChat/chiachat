@@ -8,5 +8,4 @@ import org.jetbrains.skia.Image.Companion.makeFromEncoded
 
 actual suspend fun VfsFile.readImageBitmap(): ImageBitmap {
   return makeFromEncoded(readAll()).toComposeImageBitmap()
-  painterResource()
 }

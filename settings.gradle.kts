@@ -10,7 +10,7 @@ pluginManagement {
 
 rootProject.name = "chiachat"
 
-//include(":androidApp")
+// include(":androidApp")
 
 include(":iosApp")
 

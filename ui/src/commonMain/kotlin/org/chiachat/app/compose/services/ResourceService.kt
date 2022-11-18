@@ -24,7 +24,7 @@ class ResourceService(private val ioScope: CoroutineScope) {
     }
   }
 
-  fun clearCache(){
+  fun clearCache() {
     iconCache.value = emptyMap()
   }
 }

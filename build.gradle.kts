@@ -134,9 +134,7 @@ koverMerged {
       includes += basePackage
       excludes += excludedPackages
     }
-    projects {
-      excludes += listOf(":androidApp", ":desktopApp", ":iosApp", ":webApp")
-    }
+    projects { excludes += listOf(":androidApp", ":desktopApp", ":iosApp", ":webApp") }
   }
 
   xmlReport {

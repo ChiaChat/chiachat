@@ -3,7 +3,6 @@ package org.chiachat.app.toast
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runTest
-import org.chiachat.app.toast.ToastService
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

@@ -9,7 +9,7 @@ class DbService(val driver: SqlDriver) {
   var db: ChiaChatDb = ChiaChatDb.invoke(driver)
 
   init {
-      runMigrations()
+    runMigrations()
   }
 
   @Suppress("TooGenericExceptionCaught")
@@ -22,20 +22,19 @@ class DbService(val driver: SqlDriver) {
   }
 
   fun setVersion(version: Int): Boolean {
-    val setVersionSucceeded = try {
-      val tableVersion = db.versionTableQueries.getVersion().executeAsOneOrNull()
-      if (tableVersion == null) {
-        db.versionTableQueries.setVersion(version.toLong())
-      } else {
-        db.versionTableQueries.updateVersion(version.toLong())
-      }
-      true
-    } catch (
-      e: Exception
-    ) {
-      Logger.e { e.stackTraceToString() }
-      false
-    }
+    val setVersionSucceeded =
+        try {
+          val tableVersion = db.versionTableQueries.getVersion().executeAsOneOrNull()
+          if (tableVersion == null) {
+            db.versionTableQueries.setVersion(version.toLong())
+          } else {
+            db.versionTableQueries.updateVersion(version.toLong())
+          }
+          true
+        } catch (e: Exception) {
+          Logger.e { e.stackTraceToString() }
+          false
+        }
     return setVersionSucceeded
   }
 
