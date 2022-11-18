@@ -1,19 +1,34 @@
 package org.chiachat.app.compose.components
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import org.chiachat.app.compose.composables.CchActionButton
 import org.chiachat.app.compose.composables.CchTextField
+import org.chiachat.app.compose.composables.ToggleDarkModeButton
 
-class LoginComponent: Component {
+class LoginComponent : Component {
 
-    override val vm: ILoginViewModel = LoginViewModel()
+  override val vm: ILoginViewModel = LoginViewModel()
 
-    @Composable
-    override fun View() {
-        Column(){
-            CchTextField(vm.username)
-        }
+  @Composable
+  override fun View() {
+
+    Box(modifier = Modifier.padding(40.dp)) {
+      ToggleDarkModeButton(vm.themeService, vm.resourceService, Modifier.align(Alignment.TopEnd))
+      Column(
+          verticalArrangement = Arrangement.spacedBy(15.dp),
+          horizontalAlignment = Alignment.CenterHorizontally,
+          modifier = Modifier.align(Alignment.Center)) {
+            Spacer(Modifier.weight(1f))
+            CchTextField(vm.server, "server", "chiachat.org")
+            CchTextField(vm.username, "username", "@username")
+            CchTextField(vm.password, "password")
+            CchActionButton("Login", onClick = vm::onLogin)
+            Spacer(Modifier.weight(1f))
+          }
     }
+  }
 }

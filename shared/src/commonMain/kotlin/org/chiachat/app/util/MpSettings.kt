@@ -12,8 +12,13 @@ class MpSettings {
   var refreshToken: String
     get() = settings.getString(REFRESH_TOKEN.name, "")
     set(value) = settings.putString(REFRESH_TOKEN.name, value)
+
+  var darkMode: Boolean
+    get() = settings.getBoolean(SettingKeys.DARK_MODE.name, true)
+    set(value) = settings.putBoolean(REFRESH_TOKEN.name, value)
 }
 
 enum class SettingKeys {
   REFRESH_TOKEN,
+  DARK_MODE,
 }

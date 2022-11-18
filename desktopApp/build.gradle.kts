@@ -41,9 +41,9 @@ kotlin {
   windowsAmd64(compose.desktop.windows_x64)
 }*/
 
-val ico = File("../ui/src/commonMain/resources/icons/chiachat-trans-256x256.ico")
-val icns = File("../ui/src/commonMain/resources/icons/chiachat-trans-256x256.icns")
-val png = File("../ui/src/commonMain/resources/icons/chiachat-trans-256x256.png")
+val ico = File("../ui/src/commonMain/resources/icons/chiachat/chiachat-trans-256x256.ico")
+val icns = File("../ui/src/commonMain/resources/icons/chiachat/chiachat-trans-256x256.icns")
+val png = File("../ui/src/commonMain/resources/icons/chiachat/chiachat-trans-256x256.png")
 
 compose.desktop {
   application {
