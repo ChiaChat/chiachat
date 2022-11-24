@@ -5,12 +5,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import org.chiachat.app.compose.services.NavigationService
+import org.chiachat.app.compose.services.ThemeService
 import org.chiachat.app.compose.theme.AppTheme
 import org.chiachat.app.compose.theme.ThemeResources
 import org.koin.core.component.KoinComponent
@@ -22,10 +25,12 @@ fun loadResourcesDefault(resources: MutableStateFlow<ThemeResources>) {
 
 class ComposeRoot : KoinComponent {
   val navigationService: NavigationService by inject()
+  val themeService: ThemeService by inject()
 
   @Composable
   fun View() {
-    AppTheme() {
+    val darkMode by themeService.darkMode.collectAsState()
+    AppTheme(darkMode) {
       Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         navigationService.currentView()
       }

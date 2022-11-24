@@ -11,24 +11,23 @@ import org.chiachat.app.compose.composables.ToggleDarkModeButton
 
 class LoginComponent : Component {
 
-  override val vm: ILoginViewModel = LoginViewModel()
+    override val vm: ILoginViewModel = LoginViewModel()
 
-  @Composable
-  override fun View() {
+    @Composable
+    override fun View() {
 
-    Box(modifier = Modifier.padding(40.dp)) {
-      ToggleDarkModeButton(vm.themeService, vm.resourceService, Modifier.align(Alignment.TopEnd))
-      Column(
-          verticalArrangement = Arrangement.spacedBy(15.dp),
-          horizontalAlignment = Alignment.CenterHorizontally,
-          modifier = Modifier.align(Alignment.Center)) {
-            Spacer(Modifier.weight(1f))
-            CchTextField(vm.server, "server", "chiachat.org")
-            CchTextField(vm.username, "username", "@username")
-            CchTextField(vm.password, "password")
-            CchActionButton("Login", onClick = vm::onLogin)
-            Spacer(Modifier.weight(1f))
-          }
+        Box(modifier = Modifier.padding(40.dp).fillMaxSize()) {
+            ToggleDarkModeButton(vm.themeService, vm.resourceService, Modifier.align(Alignment.TopEnd))
+            Column(
+                verticalArrangement = Arrangement.spacedBy(15.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.align(Alignment.Center).padding(40.dp).width(320.dp)
+            ) {
+                CchTextField(vm.server, "server", "chiachat.org")
+                CchTextField(vm.username, "username", "@username")
+                CchTextField(vm.password, "password")
+                CchActionButton("Login", onClick = vm::onLogin)
+            }
+        }
     }
-  }
 }
