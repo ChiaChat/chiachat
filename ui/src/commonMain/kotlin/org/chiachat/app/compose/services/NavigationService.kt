@@ -5,8 +5,9 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import org.chiachat.app.compose.components.Component
+import org.koin.core.component.KoinComponent
 
-class NavigationService(initialScreen: Component, val maxScreens: Int = 10) {
+class NavigationService(initialScreen: Component, val maxScreens: Int = 10) : KoinComponent {
 
   private val screenTree: MutableList<Component> = mutableListOf()
   private val currentScreenIndex: MutableState<Int> = mutableStateOf(0)

@@ -134,9 +134,7 @@ koverMerged {
       includes += basePackage
       excludes += excludedPackages
     }
-    projects {
-      excludes += listOf(":androidApp", ":desktopApp", ":iosApp", ":webApp")
-    }
+    projects { excludes += listOf(":androidApp", ":desktopApp", ":iosApp", ":webApp") }
   }
 
   xmlReport {
@@ -160,13 +158,13 @@ koverMerged {
       // set to false to disable rule checking
       isEnabled = true
       // custom name for the rule
-      name = null
+      name =  "Minimum Test Coverage"
       // specify by which entity the code for separate coverage evaluation will be
       target = kotlinx.kover.api.VerificationTarget.ALL
       // grouped
 
       bound { // add rule bound
-        minValue = 75
+        minValue = 25
         maxValue = 100
         // change coverage metric to evaluate (LINE, INSTRUCTION, BRANCH)
         counter = kotlinx.kover.api.CounterType.LINE

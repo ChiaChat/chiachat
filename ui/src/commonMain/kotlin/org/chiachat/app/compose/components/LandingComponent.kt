@@ -38,11 +38,7 @@ class LandingComponent(override val vm: LandingViewModel) : ILandingComponent {
           }
           TextField(text, onValueChange = { vm.textField.value = it })
           Button(onClick = vm::addProfile) { Text("Add Profile") }
-          LazyColumn {
-              items(items = users) {
-                  ProfileCard(it)
-              }
-          }
+          LazyColumn { items(items = users) { ProfileCard(it) } }
           Spacer(modifier = Modifier.weight(1f))
         }
   }

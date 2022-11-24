@@ -13,7 +13,6 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import kotlin.jvm.JvmRecord
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,15 +37,12 @@ fun ProfileCard(item: ProfileCardItem) {
                 contentDescription = "Sample",
                 modifier = Modifier.size(36.dp),
                 contentScale = ContentScale.Fit)
-          }else {
-              Text("Loading Image")
+          } else {
+            Text("Loading Image")
           }
           Column(verticalArrangement = Arrangement.spacedBy(10.dp)) { Text(item.name) }
         }
   }
 }
 
-data class ProfileCardItem(
-    val name: String,
-    val image: ImageBitmap?
-)
+data class ProfileCardItem(val name: String, val image: ImageBitmap?)

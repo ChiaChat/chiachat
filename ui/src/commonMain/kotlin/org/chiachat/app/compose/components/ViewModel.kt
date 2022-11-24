@@ -9,6 +9,7 @@ interface IViewModel {
   val vmScope: CoroutineScope
   val ioScope: CoroutineScope
 }
+
 abstract class ViewModel : IViewModel, KoinComponent {
   override val vmScope: CoroutineScope by inject(named("vmScope"))
   override val ioScope: CoroutineScope by inject(named("ioScope"))

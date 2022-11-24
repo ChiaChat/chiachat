@@ -10,6 +10,8 @@ pluginManagement {
 
 rootProject.name = "chiachat"
 
+// include(":androidApp")
+
 include(":androidApp")
 
 include(":iosApp")
@@ -21,3 +23,4 @@ include(":webApp")
 include(":ui")
 
 include(":shared")
+

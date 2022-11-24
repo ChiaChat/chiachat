@@ -20,7 +20,9 @@ class DbServiceTest {
       assertTrue { version != null && version > 1L }
       dbService.setVersion(5)
       assertTrue { dbService.getVersion() == 5 }
-      if (version != null) { dbService.setVersion(version) }
+      if (version != null) {
+        dbService.setVersion(version)
+      }
     }
   }
 }

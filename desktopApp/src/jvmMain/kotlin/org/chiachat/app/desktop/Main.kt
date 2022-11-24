@@ -10,7 +10,7 @@ fun main() {
   val sqlDriver = runBlocking { PlatformDb().getDriver() }
   val desktopApp = DesktopApp(sqlDriver)
   application {
-    val icon = painterResource("icons/chiachat-trans-256x256.png")
+    val icon = painterResource("icons/chiachat/chiachat-trans-256x256.png")
     Window(onCloseRequest = ::exitApplication, icon = icon) { desktopApp.composeRoot.View() }
   }
 }

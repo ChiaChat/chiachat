@@ -34,8 +34,6 @@ kotlin {
 
 compose.experimental { web.application {} }
 
-tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "17" }
-
 // a temporary workaround for a bug in jsRun invocation - see
 // https://youtrack.jetbrains.com/issue/KT-48273
 afterEvaluate {
