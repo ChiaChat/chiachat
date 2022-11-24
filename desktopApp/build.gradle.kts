@@ -17,7 +17,7 @@ java { toolchain { languageVersion.set(JavaLanguageVersion.of(17)) } }
 
 kotlin {
   jvm {
-    compilations.all { kotlinOptions.jvmTarget = "17" }
+    compilations.all { kotlinOptions.jvmTarget = "11" }
     withJava()
   }
 

@@ -1,5 +1,6 @@
 package org.chiachat.app.compose.components
 
+import co.touchlab.kermit.Logger
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.chiachat.app.compose.services.ResourceService
 import org.chiachat.app.compose.services.ThemeService
@@ -24,5 +25,7 @@ class LoginViewModel : ViewModel(), ILoginViewModel {
   override val username: MutableStateFlow<String> = MutableStateFlow("andrea")
   override val password: MutableStateFlow<String> = MutableStateFlow("")
 
-  override fun onLogin() {}
+  override fun onLogin() {
+    Logger.i { "Login tapped" }
+  }
 }
