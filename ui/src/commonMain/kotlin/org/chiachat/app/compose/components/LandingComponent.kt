@@ -6,10 +6,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
+import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -34,7 +34,7 @@ class LandingComponent(override val vm: LandingViewModel) : ILandingComponent {
         verticalArrangement = Arrangement.spacedBy(10.dp)) {
           Spacer(modifier = Modifier.weight(1f))
           dbVersion?.let {
-            Text(text = "Db Version: $it", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Db Version: $it", color = MaterialTheme.colors.onBackground)
           }
           TextField(text, onValueChange = { vm.textField.value = it })
           Button(onClick = vm::addProfile) { Text("Add Profile") }

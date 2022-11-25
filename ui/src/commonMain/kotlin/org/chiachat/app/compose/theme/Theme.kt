@@ -1,12 +1,12 @@
 package org.chiachat.app.compose.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-
-private val LightColors =
+/*
+private val LightColorsMaterial3 =
     lightColorScheme(
         primary = md_theme_light_primary,
         onPrimary = md_theme_light_onPrimary,
@@ -37,7 +37,7 @@ private val LightColors =
         surfaceTint = md_theme_light_surfaceTint,
     )
 
-private val DarkColors =
+private val DarkColorsMaterial3 =
     darkColorScheme(
         primary = md_theme_dark_primary,
         onPrimary = md_theme_dark_onPrimary,
@@ -66,6 +66,39 @@ private val DarkColors =
         inverseSurface = md_theme_dark_inverseSurface,
         inversePrimary = md_theme_dark_inversePrimary,
         surfaceTint = md_theme_dark_surfaceTint,
+    )*/
+
+
+private val LightColors =
+    lightColors(
+        primary = md_theme_light_tertiary,
+        onPrimary = md_theme_light_onTertiary,
+        primaryVariant = md_theme_light_tertiaryContainer,
+        secondary = md_theme_light_primary,
+        onSecondary = md_theme_light_onPrimary,
+        secondaryVariant = md_theme_light_primaryContainer,
+        error = md_theme_light_error,
+        onError = md_theme_light_onError,
+        background = md_theme_light_background,
+        onBackground = md_theme_light_onBackground,
+        surface = md_theme_light_surface,
+        onSurface = md_theme_light_onSurface,
+    )
+
+private val DarkColors =
+    darkColors(
+        primary = md_theme_dark_tertiary,
+        onPrimary = md_theme_dark_onTertiary,
+        primaryVariant = md_theme_dark_tertiaryContainer,
+        secondary = md_theme_dark_primary,
+        onSecondary = md_theme_dark_onPrimary,
+        secondaryVariant = md_theme_dark_primaryContainer,
+        error = md_theme_dark_error,
+        onError = md_theme_dark_onError,
+        background = md_theme_dark_background,
+        onBackground = md_theme_dark_onBackground,
+        surface = md_theme_dark_surface,
+        onSurface = md_theme_dark_onSurface,
     )
 
 @Composable
@@ -77,5 +110,5 @@ fun AppTheme(useDarkTheme: Boolean = isSystemInDarkTheme(), content: @Composable
         DarkColors
       }
 
-  MaterialTheme(colorScheme = colors, content = content)
+  MaterialTheme(colors = colors, content = content)
 }

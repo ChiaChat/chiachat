@@ -55,7 +55,7 @@ compose.desktop {
     }
 
     nativeDistributions {
-      targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+      targetFormats(TargetFormat.Pkg, TargetFormat.Msi, TargetFormat.Deb)
       packageName = "ChiaChat"
       packageVersion = "1.0.0"
 
