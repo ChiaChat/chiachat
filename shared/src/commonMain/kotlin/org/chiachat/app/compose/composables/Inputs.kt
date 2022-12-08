@@ -35,8 +35,8 @@ fun CchActionButton(text: String, onClick: () -> Unit, modifier: Modifier = Modi
         onClick,
         colors =
         ButtonDefaults.outlinedButtonColors(
-            containerColor = MaterialTheme.colorScheme.tertiary,
-            contentColor = MaterialTheme.colorScheme.onTertiary
+            backgroundColor = MaterialTheme.colors.secondary,
+            contentColor = MaterialTheme.colors.onSecondary
         ),
         modifier = Modifier.fillMaxWidth().then(modifier)
     ) {
@@ -66,7 +66,7 @@ fun ToggleDarkModeButton(
     IconButton(onClick = themeService::toggleDarkTheme, modifier = modifier) {
         val icon = if (isDarkMode) lightIcon else darkIcon
         icon?.let {
-            Icon(bitmap = it, contentDescription = "Toggle Light/Dark Mode", tint = MaterialTheme.colorScheme.tertiary)
+            Icon(bitmap = it, contentDescription = "Toggle Light/Dark Mode", tint = MaterialTheme.colors.secondary)
         }
     }
 }

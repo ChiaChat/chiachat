@@ -34,7 +34,7 @@ class LandingComponent(override val vm: LandingViewModel) : ILandingComponent {
         verticalArrangement = Arrangement.spacedBy(10.dp)) {
           Spacer(modifier = Modifier.weight(1f))
           dbVersion?.let {
-            Text(text = "Db Version: $it", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Db Version: $it", color = MaterialTheme.colors.onBackground)
           }
           TextField(text, onValueChange = { vm.textField.value = it })
           Button(onClick = vm::addProfile) { Text("Add Profile") }

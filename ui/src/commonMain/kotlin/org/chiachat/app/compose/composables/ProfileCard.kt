@@ -20,7 +20,7 @@ fun ProfileCard(item: ProfileCardItem) {
   Card(
       shape = RoundedCornerShape(8.dp),
       colors =
-          CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer),
+          CardDefaults.cardColors(containerColor = MaterialTheme.colors.tertiaryContainer),
       modifier =
           Modifier.padding(horizontal = 40.dp)
               .padding(vertical = 10.dp)

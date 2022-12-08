@@ -1,4 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
 
 package org.chiachat.app.compose.composables
 
@@ -14,13 +13,11 @@ import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileCard(item: ProfileCardItem) {
   Card(
       shape = RoundedCornerShape(8.dp),
-      colors =
-          CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer),
+      backgroundColor = MaterialTheme.colors.secondaryVariant,
       modifier =
           Modifier.padding(horizontal = 40.dp)
               .padding(vertical = 10.dp)

@@ -31,7 +31,7 @@ class ComposeRoot : KoinComponent {
   fun View() {
     val darkMode by themeService.darkMode.collectAsState()
     AppTheme(darkMode) {
-      Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+      Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.background)) {
         navigationService.currentView()
       }
     }
