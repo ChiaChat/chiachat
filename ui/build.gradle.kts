@@ -20,7 +20,7 @@ kotlin {
                 api(compose.ui)
                 api(compose.foundation)
                 api(compose.runtime)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class) api(compose.material3)
+                api(compose.material)
             }
         }
         val commonTest by getting {
