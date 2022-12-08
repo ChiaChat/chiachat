@@ -16,7 +16,7 @@ kotlin {
   sourceSets {
     val jsMain by getting {
       dependencies {
-        implementation(project(":ui"))
+        implementation(project(":shared"))
         implementation(compose.web.core)
         implementation(kotlin("stdlib-js"))
         implementation(devNpm("copy-webpack-plugin", "11.0.0"))
@@ -25,7 +25,7 @@ kotlin {
       this.resources.setSrcDirs(
           listOf(
               project(":shared").file(resPath),
-              project(":ui").file(resPath),
+              project(":shared").file(resPath),
               project.file("src/jsMain/resources")))
     }
     val jsTest by getting

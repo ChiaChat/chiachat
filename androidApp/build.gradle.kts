@@ -32,12 +32,12 @@ android {
     }
   }
   sourceSets["main"].apply {
-    assets.srcDirs(project(":ui").file(resPath), project(":shared").file(resPath))
+    assets.srcDirs(project(":shared").file(resPath), project(":shared").file(resPath))
   }
 }
 
 dependencies {
-  implementation(project(":ui"))
+  implementation(project(":shared"))
   implementation("androidx.activity:activity-compose:1.6.1")
   implementation(Deps.Koin.compose)
 

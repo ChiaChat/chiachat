@@ -56,7 +56,7 @@ kotlin {
   }
 
   sourceSets {
-    val commonMain by getting { dependencies { implementation(project(":ui")) } }
+    val commonMain by getting { dependencies { implementation(project(":shared")) } }
 
     val nativeMain by creating { dependsOn(commonMain) }
     val uikitMain by creating { dependsOn(nativeMain) }

@@ -1,8 +1,6 @@
 plugins {
     kotlin("multiplatform")
-    id("org.jetbrains.compose") version Versions.composeMultiplatform
     id("com.android.library")
-    id(Plugin.Id.kover)
 }
 
 version = "1.0"
@@ -36,7 +34,6 @@ kotlin {
         }
         val jvmMain by getting {
             dependsOn(commonMain)
-            dependencies { api(compose.preview) }
         }
         val jvmTest by getting { dependencies { api(project(":shared")) } }
         val jsMain by getting { dependsOn(commonMain) }
