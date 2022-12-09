@@ -33,7 +33,7 @@ compose.desktop {
             }
 
             macOS {
-                bundleID = "org.jetbrains.compose.demo.widgets"
+                bundleID = "org.chiachat.app"
             }
         }
     }
