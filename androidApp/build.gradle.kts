@@ -1,50 +1,33 @@
 plugins {
-  id("com.android.application")
-  kotlin("android")
-  id("org.jetbrains.compose") version Versions.composeMultiplatform
+    kotlin("multiplatform")
+    id("com.android.application")
+    id("org.jetbrains.compose")
 }
 
-val resPath = "src/commonMain/resources"
+kotlin {
+    android()
+    sourceSets {
+        val androidMain by getting {
+            dependencies {
+                implementation(project(":shared"))
+                implementation("androidx.appcompat:appcompat:1.5.1")
+                implementation("androidx.activity:activity-compose:1.6.1")
+            }
+        }
+    }
+}
 
 android {
-  compileSdk = 33
-  defaultConfig {
-    applicationId = "org.chiachat.app.android"
-    minSdk = 26
-    targetSdk = 33
-    versionCode = 1
-    versionName = "1.0"
-
-    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-  }
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-  }
-
-  kotlinOptions { jvmTarget = "17" }
-
-  buildTypes {
-    getByName("release") {
-      isMinifyEnabled = true
-      isShrinkResources = true
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+    compileSdk = 33
+    defaultConfig {
+        applicationId = "org.jetbrains.FallingBalls"
+        minSdk = 24
+        targetSdk = 33
+        versionCode = 1
+        versionName = "1.0"
     }
-  }
-  sourceSets["main"].apply {
-    assets.srcDirs(project(":shared").file(resPath), project(":shared").file(resPath))
-  }
-}
-
-dependencies {
-  implementation(project(":shared"))
-  implementation("androidx.activity:activity-compose:1.6.1")
-  implementation(Deps.Koin.compose)
-
-  /*testImplementation(Deps.Test.junitApi)
-  testRuntimeOnly(Deps.Test.junitEngine)
-  androidTestImplementation("androidx.test:runner:1.4.0")
-  androidTestImplementation(Deps.Test.junitApi)
-  androidTestImplementation("de.mannodermaus.junit5:android-test-core:1.3.0")
-  androidTestRuntimeOnly("de.mannodermaus.junit5:android-test-runner:1.3.0")*/
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }

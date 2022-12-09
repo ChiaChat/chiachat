@@ -1,24 +1,38 @@
 plugins {
     kotlin("multiplatform")
-    id("app.cash.sqldelight") version "2.0.0-alpha04"
+    kotlin("native.cocoapods")
     id("com.android.library")
-    id("org.jetbrains.compose") version Versions.composeMultiplatform
-    id(Plugin.Id.kover)
+    id("org.jetbrains.compose")
 }
 
-version = "1.0"
+version = "1.0-SNAPSHOT"
 
 kotlin {
-    jvm()
-    js(IR) { browser {} }
     android()
-    iosArm64()
-    iosX64()
+
+    jvm("desktop")
+    js(IR) { browser() }
+
+    ios()
     iosSimulatorArm64()
+
+    cocoapods {
+        summary = "Shared code for the sample"
+        homepage = "https://github.com/JetBrains/compose-jb"
+        ios.deploymentTarget = "14.1"
+        podfile = project.file("../iosApp/Podfile")
+        framework {
+            baseName = "shared"
+            isStatic = true
+        }
+    }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material)
                 api(Deps.Log.kermit)
                 api(Deps.Kotlinx.coroutines)
                 api(Deps.Koin.core)
@@ -27,111 +41,46 @@ kotlin {
                 with(Deps.Utility) {
                     api(mpsettings)
                     api(mpsettingsNoArgs)
-                }
-
-                api(compose.ui)
-                api(compose.foundation)
-                api(compose.runtime)
-                api(compose.material)
-            }
-        }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-                with(Deps.Test) {
-                    implementation(koin)
-                    implementation(coroutines)
+                    api(compose.ui)
                 }
             }
         }
-        val jvmMain by getting {
-            dependencies {
-                implementation(Deps.Sqldelight.sqliteJvmDriver)
-                api(compose.preview)
-            }
-        }
-        val jvmTest by getting {}
-        val jsMain by getting { dependencies { implementation(Deps.Sqldelight.sqliteJsDriver) } }
-        val jsTest by getting
         val androidMain by getting {
             dependencies {
                 implementation("androidx.appcompat:appcompat:1.5.1")
-                implementation("androidx.core:core-ktx:1.9.0")
-                implementation("androidx.compose.ui:ui-graphics:1.4.0-alpha01")
-                api(compose.preview)
-                implementation(Deps.Sqldelight.sqliteAndroidDriver)
+                implementation("androidx.core:core-ktx:1.8.0")
             }
         }
-        val androidTest by getting { dependencies { implementation("junit:junit:4.13.2") } }
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-
-            dependencies { implementation(Deps.Sqldelight.sqliteNativeDriver) }
+        val iosMain by getting
+        val iosTest by getting
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
         }
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        val iosSimulatorArm64Test by getting
-        val iosTest by creating {
-            dependsOn(commonTest)
-            iosX64Test.dependsOn(this)
-            iosArm64Test.dependsOn(this)
-            iosSimulatorArm64Test.dependsOn(this)
+        val iosSimulatorArm64Test by getting {
+            dependsOn(iosTest)
         }
-    }
-}
 
-sqldelight {
-    database("ChiaChatDb") { // This will be the name of the generated database class.
-        packageName = "org.chiachat.app"
-        dialect(Deps.Sqldelight.sqliteDialect)
-        deriveSchemaFromMigrations = true
-        verifyMigrations = true
+        val desktopMain by getting {
+            dependencies {
+                implementation(compose.desktop.common)
+            }
+        }
+        val jsMain by getting {}
+        val jsTest by getting {}
     }
 }
 
 android {
     compileSdk = 33
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    sourceSets["main"].res.srcDirs("src/androidMain/res")
+    sourceSets["main"].assets.srcDirs("src/commonMain/resources")
     defaultConfig {
-        minSdk = 26
+        minSdk = 24
         targetSdk = 33
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
-
-    sourceSets {
-        named("main") {
-            manifest.srcFile("src/androidMain/AndroidManifest.xml")
-            res.srcDirs("src/androidMain/res")
-            assets.srcDirs("src/commonMain/resources")
-        }
-    }
-    namespace = "org.chiachat.app.shared"
-}
-
-
-android {
-    compileSdk = 33
-
-    defaultConfig {
-        minSdk = 26
-        targetSdk = 33
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-
-    namespace = "org.chiachat.app.ui"
 }
