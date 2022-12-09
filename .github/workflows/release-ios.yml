@@ -1,0 +1,28 @@
+name: Release IOS
+
+on:
+  release:
+    types: [ released, prereleased ]
+
+jobs:
+  gradle:
+    strategy:
+      matrix:
+        os: [ macos-latest ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'adopt'
+      - uses: gradle/gradle-build-action@v2.3.3
+        with:
+          arguments: iosApp:linkReleaseExecutableUikitArm64
+        #      - uses: softprops/action-gh-release@v1
+        #        with:
+        #          files: |
+        #            desktopApp/build/compose/binaries/main-release/**/*.*
+        #            LICENSE
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
