@@ -1,8 +1,6 @@
 package org.chiachat.app.ui.composables.chatgpt
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,7 +14,17 @@ import org.chiachat.app.ui.theme.CchGraphics
 
 
 object AuthInputs {
-    @Composable
+    private val textFieldModifier = Modifier.height(60.dp).width(300.dp)
+    private fun isValidEmail(email: String): Boolean {
+        return email.contains("@") && email.contains(".")
+    }
+
+    private fun isPasswordValid(password: String): Boolean {
+        return password.length > 8
+    }
+
+
+        @Composable
     fun Logo(resources: ResourceService) {
         Graphic(resources, CchGraphics.CHIACHAT_LOGO, "ChiaChat Logo", modifier = Modifier.width(300.dp))
     }
@@ -26,7 +34,6 @@ object AuthInputs {
         Text(label, color = MaterialTheme.colors.onBackground)
     }
 
-    private val textFieldModifier = Modifier.height(60.dp).width(300.dp)
 
     @Composable
     fun Username(username: String, onUsernameChange: (String) -> Unit) {
@@ -41,52 +48,82 @@ object AuthInputs {
         )
     }
 
+
     @Composable
     fun Email(email: String, onEmailChange: (String) -> Unit) {
-        OutlinedTextField(
-            label = { TextFieldLabel("Email") },
-            value = email,
-            onValueChange = onEmailChange,
-            modifier = textFieldModifier,
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                textColor = MaterialTheme.colors.primary,
+        val error = !isValidEmail(email) && email.isNotBlank()
+
+        Column {
+            if (error) {
+                Text(
+                    "Invalid email address",
+                    color = MaterialTheme.colors.error
+                )
+                Spacer(Modifier.size(5.dp))
+            }
+
+            OutlinedTextField(
+                label = { TextFieldLabel("Email") },
+                value = email,
+                onValueChange = onEmailChange,
+                modifier = textFieldModifier,
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    textColor = MaterialTheme.colors.primary,
+                ),
+                isError = error
             )
-        )
+        }
+
     }
 
     @Composable
     fun Password(password: String, onPasswordChange: (String) -> Unit) {
-        OutlinedTextField(
-            label = { TextFieldLabel("Password") },
-            value = password,
-            onValueChange = onPasswordChange,
-            visualTransformation = PasswordVisualTransformation(),
-            modifier = textFieldModifier,
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                textColor = MaterialTheme.colors.primary,
+        val error = !isPasswordValid(password) && password.isNotBlank()
+
+        Column {
+            if (error) {
+                Text(
+                    "Password must be at least 8 characters",
+                    color = MaterialTheme.colors.error
+                )
+                Spacer(Modifier.size(5.dp))
+            }
+            OutlinedTextField(
+                label = { TextFieldLabel("Password") },
+                value = password,
+                onValueChange = onPasswordChange,
+                visualTransformation = PasswordVisualTransformation(),
+                modifier = textFieldModifier,
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    textColor = MaterialTheme.colors.primary,
+                ),
+                isError = error
             )
-        )
+        }
     }
 
     @Composable
     fun ConfirmPassword(password: String, confirmPassword: String, onConfirmPasswordChange: (String) -> Unit) {
         Column {
+            val error = password.isNotBlank() && confirmPassword.isNotBlank() && password != confirmPassword
+            if (error) {
+                Text(
+                    "Passwords do not match",
+                    color = MaterialTheme.colors.error
+                )
+                Spacer(modifier = Modifier.size(5.dp))
+            }
             OutlinedTextField(
                 label = { TextFieldLabel("Confirm Password") },
                 value = confirmPassword,
                 onValueChange = onConfirmPasswordChange,
                 visualTransformation = PasswordVisualTransformation(),
+                isError = error,
                 modifier = textFieldModifier,
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     textColor = MaterialTheme.colors.primary,
                 )
             )
-            if (confirmPassword != password) {
-                Text(
-                    "Passwords do not match",
-                    color = MaterialTheme.colors.error
-                )
-            }
         }
     }
 
