@@ -1,18 +1,14 @@
 package org.chiachat.app.ui.composables
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.chiachat.app.ui.services.ResourceService
 import org.chiachat.app.ui.services.ThemeService
-import org.chiachat.app.ui.theme.CchIcons
+import org.chiachat.app.ui.theme.CchGraphics
 
 @Composable
 internal fun CchTextField(
@@ -49,26 +45,14 @@ internal fun CchActionButton(text: String, onClick: () -> Unit, modifier: Modifi
 @Composable
 internal fun ToggleDarkModeButton(
     themeService: ThemeService,
-    resourceService: ResourceService,
+    resources: ResourceService,
     modifier: Modifier = Modifier
 ) {
-    var darkIcon by remember { mutableStateOf<ImageBitmap?>(null) }
-    var lightIcon by remember { mutableStateOf<ImageBitmap?>(null) }
     val isDarkMode by themeService.darkMode.collectAsState()
-
-    LaunchedEffect(true) {
-        resourceService.loadIcon(CchIcons.DARK_MODE) {
-            darkIcon = it
-        }
-        resourceService.loadIcon(CchIcons.LIGHT_MODE) {
-            lightIcon = it
-        }
-    }
-
     IconButton(onClick = themeService::toggleDarkTheme) {
-        val icon = if (isDarkMode) lightIcon else darkIcon
-        icon?.let {
-            Icon(bitmap = it, contentDescription = "Toggle Light/Dark Mode", tint = MaterialTheme.colors.secondary)
-        }
+        if (isDarkMode)
+            Graphic(resources, CchGraphics.LIGHT_MODE, "Enable light mode")
+        else
+            Graphic(resources, CchGraphics.DARK_MODE, "Enable Dark Mode")
     }
 }
