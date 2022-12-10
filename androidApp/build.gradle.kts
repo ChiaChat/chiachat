@@ -20,7 +20,7 @@ kotlin {
 android {
     compileSdk = 33
     defaultConfig {
-        applicationId = "org.jetbrains.FallingBalls"
+        applicationId = "org.chiachat.app"
         minSdk = 24
         targetSdk = 33
         versionCode = 1

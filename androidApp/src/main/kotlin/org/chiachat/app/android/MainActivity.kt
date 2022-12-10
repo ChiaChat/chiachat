@@ -1,4 +1,4 @@
-package org.jetbrains.compose.demo.widgets
+package org.chiachat.app.android
 
 import AndroidRoot
 import android.os.Bundle
