@@ -4,6 +4,8 @@ import androidx.compose.ui.graphics.ImageBitmap
 import co.touchlab.kermit.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.forEach
 import kotlinx.coroutines.launch
 import org.chiachat.app.ui.theme.CchIcons
 import org.chiachat.app.util.readImageBitmap
@@ -18,10 +20,9 @@ class ResourceService(private val ioScope: CoroutineScope) {
       onLoad(cachedIcon)
     } else {
       ioScope.launch {
-        Logger.i { " Loading image"}
-//        val bitmap = icon.file.readImageBitmap()
-//        iconCache.value += icon to bitmap
-//        onLoad(bitmap)
+        val bitmap = icon.file.readImageBitmap()
+        iconCache.value += icon to bitmap
+        onLoad(bitmap)
       }
     }
   }

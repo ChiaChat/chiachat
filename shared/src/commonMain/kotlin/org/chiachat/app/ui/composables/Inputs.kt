@@ -65,7 +65,7 @@ internal fun ToggleDarkModeButton(
         }
     }
 
-    IconButton(onClick = themeService::toggleDarkTheme, modifier = modifier.background(Color.Blue)) {
+    IconButton(onClick = themeService::toggleDarkTheme) {
         val icon = if (isDarkMode) lightIcon else darkIcon
         icon?.let {
             Icon(bitmap = it, contentDescription = "Toggle Light/Dark Mode", tint = MaterialTheme.colors.secondary)
