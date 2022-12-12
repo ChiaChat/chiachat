@@ -27,7 +27,8 @@ object Versions {
   const val conveyor = "1.2"
   const val kotlinxSerialization = "1.4.1"
   const val mpsettings = "1.0.0-RC"
-  const val trixnity = "3.0.0-beta3"
+  const val trixnity = "3.0.0"
+  const val circuit = "0.4.0"
 }
 
 object Plugin {
@@ -78,6 +79,7 @@ object Deps {
         "com.google.accompanist:accompanist-navigation-animation:${Versions.accompanist}"
     const val accompanistSwipeRefresh =
         "com.google.accompanist:accompanist-swiperefresh:${Versions.accompanist}"
+    const val circuit = "com.slack.circuit:circuit-core:${Versions.circuit}"
   }
 
   object Kor {

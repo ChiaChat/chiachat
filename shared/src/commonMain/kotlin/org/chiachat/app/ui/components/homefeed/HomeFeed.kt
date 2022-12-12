@@ -1,18 +1,16 @@
-package org.chiachat.app.ui.composables.chatgpt
+package org.chiachat.app.ui.components.homefeed
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
-import org.chiachat.app.ui.composables.Graphics
+import androidx.compose.ui.unit.dp
+import org.chiachat.app.ui.composables.Graphics.GraphicButton
 import org.chiachat.app.ui.theme.CchGraphics
 
 data class Post(
@@ -65,35 +63,17 @@ internal object HomeFeed {
 
     @Composable
     fun MenuButton(onClick: () -> Unit) {
-        IconButton(onClick = onClick) {
-            Graphics.Graphic(
-                graphic = CchGraphics.MENU,
-                contentDescription = "Menu",
-                tint = MaterialTheme.colors.primary
-            )
-        }
+        GraphicButton(graphic = CchGraphics.MENU, contentDescription = "menu", onClick = onClick)
     }
 
     @Composable
     fun HomeButton(onClick: () -> Unit) {
-        IconButton(onClick = onClick) {
-            Graphics.Graphic(
-                graphic = CchGraphics.CHIACHAT_ICON,
-                contentDescription = "Home",
-                tint = MaterialTheme.colors.primary
-            )
-        }
+        GraphicButton(graphic = CchGraphics.CHIACHAT_ICON, contentDescription = "home", onClick = onClick)
     }
 
     @Composable
     fun NotificationButton(onClick: () -> Unit) {
-        IconButton(onClick = onClick) {
-            Graphics.Graphic(
-                graphic = CchGraphics.NOTIFICATION_BELL,
-                contentDescription = "Notifications",
-                tint = MaterialTheme.colors.primary
-            )
-        }
+        GraphicButton(graphic = CchGraphics.NOTIFICATION_BELL, contentDescription = "notifications", onClick = onClick)
     }
 
 

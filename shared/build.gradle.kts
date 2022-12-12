@@ -33,12 +33,13 @@ kotlin {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material)
+//                implementation(Deps.Compose.circuit)
                 api(Deps.Log.kermit)
                 api(Deps.Kotlinx.coroutines)
                 api(Deps.Koin.core)
                 api(Deps.Kor.korio)
 
-//                api(Deps.Matrix.Client)
+                implementation(Deps.Matrix.Client)
                 with(Deps.Utility) {
                     api(mpsettings)
                     api(mpsettingsNoArgs)
@@ -66,7 +67,11 @@ kotlin {
                 implementation(compose.desktop.common)
             }
         }
-        val jsMain by getting {}
+        val jsMain by getting {
+            dependencies {
+                npm("@matrix-org/olm", "3.2.13")
+            }
+        }
         val jsTest by getting {}
     }
 }

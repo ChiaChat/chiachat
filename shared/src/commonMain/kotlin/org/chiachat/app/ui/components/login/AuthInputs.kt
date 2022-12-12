@@ -1,4 +1,4 @@
-package org.chiachat.app.ui.composables.chatgpt
+package org.chiachat.app.ui.components.login
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -9,7 +9,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.chiachat.app.ui.composables.Graphics.Graphic
-import org.chiachat.app.ui.services.ResourceService
 import org.chiachat.app.ui.theme.CchGraphics
 
 

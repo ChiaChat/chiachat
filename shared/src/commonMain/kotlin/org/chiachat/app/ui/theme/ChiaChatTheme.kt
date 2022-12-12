@@ -109,7 +109,7 @@ internal object ChiaChatTheme: KoinComponent {
     @Composable
     internal fun AppTheme(content: @Composable() () -> Unit) {
         val colors =
-            if (isSystemInDarkTheme()) {
+            if (themeService.isDarkMode()) {
                 DarkColors
             } else {
                 LightColors

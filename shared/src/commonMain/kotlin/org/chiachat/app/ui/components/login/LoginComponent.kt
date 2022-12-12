@@ -1,9 +1,10 @@
-package org.chiachat.app.ui.components
+package org.chiachat.app.ui.components.login
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.*
-import org.chiachat.app.ui.composables.chatgpt.*
-import org.chiachat.app.ui.composables.chatgpt.HomeFeed
+import org.chiachat.app.ui.components.Component
+import org.chiachat.app.ui.components.homefeed.Post
+import org.chiachat.app.ui.components.homefeed.User
+import org.chiachat.app.ui.components.register.RegistrationComposables
 import org.chiachat.app.ui.services.ResourceService
 import org.koin.core.component.inject
 
@@ -117,15 +118,15 @@ internal class LoginComponent : Component {
 
     @Composable
     override fun View() {
-        Column {
-            HomeFeed.HomeFeedScreen(posts)
-        }
-//        var register by remember { mutableStateOf(true) }
-//        if (register) {
-//            RegistrationComposables.RegistrationScreen(resources) { register = false }
-//        } else {
-//            LoginComposables.LoginScreen(resources)
+//        Column {
+//            HomeFeed.HomeFeedScreen(posts)
 //        }
+        var register by remember { mutableStateOf(true) }
+        if (register) {
+            RegistrationComposables.RegistrationScreen(resources) { register = false }
+        } else {
+            LoginComposables.LoginScreen(resources)
+        }
         /*Box(modifier = Modifier.padding(40.dp).fillMaxSize()) {
             ToggleDarkModeButton(vm.themeService, vm.resourceService, Modifier.align(Alignment.TopEnd))
             Column(

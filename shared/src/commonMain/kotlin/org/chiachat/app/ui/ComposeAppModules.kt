@@ -1,8 +1,7 @@
 package org.chiachat.app.ui
 
-import org.chiachat.app.ui.components.*
-import org.chiachat.app.ui.components.LandingComponent
-import org.chiachat.app.ui.components.LoginComponent
+import org.chiachat.app.ui.components.login.LoginComponent
+import org.chiachat.app.ui.components.login.LoginViewModel
 import org.chiachat.app.ui.services.NavigationService
 import org.chiachat.app.ui.services.ResourceService
 import org.chiachat.app.ui.services.ThemeService
@@ -12,8 +11,6 @@ import org.koin.dsl.module
 
 class ComposeAppModules {
   val components = module {
-    singleOf(::LandingViewModel)
-    singleOf(::LandingComponent)
     singleOf(::LoginComponent)
     singleOf(::LoginViewModel)
   }

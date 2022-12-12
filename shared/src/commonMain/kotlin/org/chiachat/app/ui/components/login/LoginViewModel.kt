@@ -1,7 +1,9 @@
-package org.chiachat.app.ui.components
+package org.chiachat.app.ui.components.login
 
 import co.touchlab.kermit.Logger
 import kotlinx.coroutines.flow.MutableStateFlow
+import org.chiachat.app.ui.components.IViewModel
+import org.chiachat.app.ui.components.ViewModel
 import org.chiachat.app.ui.services.ResourceService
 import org.chiachat.app.ui.services.ThemeService
 import org.koin.core.component.inject

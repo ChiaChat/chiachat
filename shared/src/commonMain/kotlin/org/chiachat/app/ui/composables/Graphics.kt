@@ -2,6 +2,7 @@ package org.chiachat.app.ui.composables
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -14,7 +15,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 
-internal object Graphics: KoinComponent {
+internal object Graphics : KoinComponent {
 
     val resources: ResourceService by inject()
 
@@ -39,8 +40,21 @@ internal object Graphics: KoinComponent {
                 bitmap = it,
                 contentDescription = contentDescription,
                 tint = tint,
-                modifier = Modifier.size(64.dp).then(modifier)
+                modifier = modifier
             )
+        }
+    }
+
+    // wraps the above function inside of an IconButton and passes in the onclick
+    @Composable
+    fun GraphicButton(
+        graphic: CchGraphics,
+        tint: Color = MaterialTheme.colors.primary,
+        contentDescription: String,
+        onClick: () -> Unit
+    ) {
+        IconButton(onClick = onClick) {
+            Graphic(graphic, contentDescription, tint = tint, modifier = Modifier.size(64.dp))
         }
     }
 }
