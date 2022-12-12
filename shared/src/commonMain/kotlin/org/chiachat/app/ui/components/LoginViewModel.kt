@@ -6,7 +6,7 @@ import org.chiachat.app.ui.services.ResourceService
 import org.chiachat.app.ui.services.ThemeService
 import org.koin.core.component.inject
 
-interface ILoginViewModel : IViewModel {
+internal interface ILoginViewModel : IViewModel {
   val themeService: ThemeService
   val resourceService: ResourceService
 
@@ -17,7 +17,7 @@ interface ILoginViewModel : IViewModel {
   fun onLogin()
 }
 
-class LoginViewModel : ViewModel(), ILoginViewModel {
+internal class LoginViewModel : ViewModel(), ILoginViewModel {
   override val themeService: ThemeService by inject()
   override val resourceService: ResourceService by inject()
 

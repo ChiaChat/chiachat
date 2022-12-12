@@ -1,5 +1,6 @@
 package org.chiachat.app.ui.composables
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -48,12 +49,10 @@ internal object Inputs : KoinComponent {
     val themeService: ThemeService by inject()
 
     @Composable
-    fun ToggleDarkModeButton(
-        modifier: Modifier = Modifier
-    ) {
-        val isDarkMode by themeService.darkMode.collectAsState()
-        IconButton(onClick = themeService::toggleDarkTheme) {
-            if (isDarkMode)
+    fun ToggleDarkModeButton() {
+        val systemInDarkTheme = isSystemInDarkTheme()
+        IconButton(onClick = { themeService.toggleDarkTheme(systemInDarkTheme) }) {
+            if (themeService.isDarkMode())
                 Graphic(CchGraphics.LIGHT_MODE, "Enable light mode")
             else
                 Graphic(CchGraphics.DARK_MODE, "Enable Dark Mode")

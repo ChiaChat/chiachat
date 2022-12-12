@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import org.chiachat.app.ui.services.NavigationService
 import org.chiachat.app.ui.services.ThemeService
-import org.chiachat.app.ui.theme.AppTheme
+import org.chiachat.app.ui.theme.ChiaChatTheme.AppTheme
 import org.chiachat.app.ui.theme.ThemeResources
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -30,8 +30,7 @@ internal class ComposeRoot : KoinComponent {
 
   @Composable
   fun View() {
-    val darkMode by themeService.darkMode.collectAsState()
-    AppTheme(darkMode) {
+    AppTheme() {
       Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.background)) {
         navigationService.currentView()
       }

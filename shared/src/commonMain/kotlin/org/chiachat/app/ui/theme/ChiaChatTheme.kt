@@ -5,6 +5,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import org.chiachat.app.ui.services.ThemeService
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 /*
 private val LightColorsMaterial3 =
@@ -101,14 +104,17 @@ private val DarkColors =
         onSurface = md_theme_dark_onSurface,
     )
 
-@Composable
-internal fun AppTheme(useDarkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
-    val colors =
-        if (!useDarkTheme) {
-            LightColors
-        } else {
-            DarkColors
-        }
+internal object ChiaChatTheme: KoinComponent {
+    val themeService: ThemeService by inject()
+    @Composable
+    internal fun AppTheme(content: @Composable() () -> Unit) {
+        val colors =
+            if (isSystemInDarkTheme()) {
+                DarkColors
+            } else {
+                LightColors
+            }
 
-    MaterialTheme(colors = colors, content = content)
+        MaterialTheme(colors = colors, content = content)
+    }
 }

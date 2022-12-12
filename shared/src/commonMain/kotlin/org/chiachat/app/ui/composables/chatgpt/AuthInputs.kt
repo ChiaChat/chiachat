@@ -13,7 +13,7 @@ import org.chiachat.app.ui.services.ResourceService
 import org.chiachat.app.ui.theme.CchGraphics
 
 
-object AuthInputs {
+internal object AuthInputs {
     private val textFieldModifier = Modifier.height(60.dp).width(300.dp)
     private fun isValidEmail(email: String): Boolean {
         return email.contains("@") && email.contains(".")

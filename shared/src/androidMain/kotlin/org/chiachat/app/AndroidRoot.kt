@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import org.chiachat.app.SharedAppModules
 import org.chiachat.app.ui.ComposeAppModules
 import org.chiachat.app.ui.ComposeRoot
+import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
