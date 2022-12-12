@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.chiachat.app.ui.composables.Graphic
+import org.chiachat.app.ui.composables.Graphics.Graphic
 import org.chiachat.app.ui.services.ResourceService
 import org.chiachat.app.ui.theme.CchGraphics
 
@@ -25,8 +25,8 @@ object AuthInputs {
 
 
     @Composable
-    fun Logo(resources: ResourceService) {
-        Graphic(resources, CchGraphics.CHIACHAT_LOGO, "ChiaChat Logo", modifier = Modifier.width(300.dp))
+    fun Logo() {
+        Graphic(CchGraphics.CHIACHAT_LOGO, "ChiaChat Logo", modifier = Modifier.width(300.dp))
     }
 
     @Composable

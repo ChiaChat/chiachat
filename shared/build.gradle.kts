@@ -37,6 +37,7 @@ kotlin {
                 api(Deps.Kotlinx.coroutines)
                 api(Deps.Koin.core)
                 api(Deps.Kor.korio)
+
 //                api(Deps.Matrix.Client)
                 with(Deps.Utility) {
                     api(mpsettings)

@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ImageBitmap
 import kotlinx.coroutines.flow.MutableStateFlow
+import org.chiachat.app.ui.composables.Graphics.Graphic
 import org.chiachat.app.ui.services.ResourceService
 import org.chiachat.app.ui.services.ThemeService
 import org.chiachat.app.ui.theme.CchGraphics
@@ -51,8 +51,8 @@ internal fun ToggleDarkModeButton(
     val isDarkMode by themeService.darkMode.collectAsState()
     IconButton(onClick = themeService::toggleDarkTheme) {
         if (isDarkMode)
-            Graphic(resources, CchGraphics.LIGHT_MODE, "Enable light mode")
+            Graphic(CchGraphics.LIGHT_MODE, "Enable light mode")
         else
-            Graphic(resources, CchGraphics.DARK_MODE, "Enable Dark Mode")
+            Graphic(CchGraphics.DARK_MODE, "Enable Dark Mode")
     }
 }
