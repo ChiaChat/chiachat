@@ -1,9 +1,10 @@
 package org.chiachat.app.db
 
-import app.cash.sqldelight.db.SqlDriver
-import co.touchlab.kermit.Logger
-import org.chiachat.app.ChiaChatDb
+//import app.cash.sqldelight.db.SqlDriver
+//import co.touchlab.kermit.Logger
+//import org.chiachat.app.ChiaChatDb
 
+/*
 class DbService(val driver: SqlDriver) {
 
   var db: ChiaChatDb = ChiaChatDb.invoke(driver)
@@ -57,3 +58,4 @@ class DbService(val driver: SqlDriver) {
 class FailedToSetDbVersionException : Exception()
 
 class MigrationException : Exception("Critical Error: Failed to run database migration")
+*/

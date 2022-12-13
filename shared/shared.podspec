@@ -1,14 +1,14 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'shared'
-    spec.version                  = '1.0'
-    spec.homepage                 = 'Link to the shared Module homepage'
+    spec.version                  = '1.0-SNAPSHOT'
+    spec.homepage                 = 'https://github.com/JetBrains/compose-jb'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'Some description for the shared Module'
+    spec.summary                  = 'Shared code for the sample'
     spec.vendored_frameworks      = 'build/cocoapods/framework/shared.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target = '14.0'
+    spec.ios.deployment_target = '14.1'
                 
                 
     spec.pod_target_xcconfig = {
@@ -22,8 +22,8 @@ Pod::Spec.new do |spec|
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT
-                if [ "YES" = "$COCOAPODS_SKIP_KOTLIN_BUILD" ]; then
-                  echo "Skipping Gradle build task invocation due to COCOAPODS_SKIP_KOTLIN_BUILD environment variable set to \"YES\""
+                if [ "YES" = "$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED" ]; then
+                  echo "Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \"YES\""
                   exit 0
                 fi
                 set -ev
